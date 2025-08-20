@@ -7,12 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Itinerários TCGL</title>
 
-    <!-- Link para a fonte Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Link para o CDN do Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -30,7 +28,6 @@
         }
     </script>
 
-    <!-- CSS personalizado para o menu sanduíche, barra de rolagem e dark mode -->
     <style>
         /* Estilos base para o ícone do menu sanduíche */
         .hamburger-icon span {
@@ -123,7 +120,7 @@
             }
 
             .hamburger-icon span {
-                background-color: #e0e0e0;
+                background-color: #fff;
             }
 
             .link-menu:hover {
@@ -201,14 +198,11 @@
 </head>
 
 <body class="bg-gray-100 text-gray-800 font-inter">
-    <!-- Container principal com largura responsiva -->
     <div class="container mx-auto max-w-4xl p-2 sm:p-6 md:p-8">
 
-        <!-- Header da página com o menu de navegação -->
         <header class="fixed top-0 left-0 w-full bg-white shadow-md p-4 z-30 flex justify-between items-center">
             <h1 class="text-2xl sm:text-4xl font-bold text-blue-800">Itinerários das linhas TCGL</h1>
 
-            <!-- Botão do menu sanduíche -->
             <button id="menuBtn" class="hamburger-icon p-2 focus:outline-none lg:hidden">
                 <span></span>
                 <span></span>
@@ -216,32 +210,24 @@
             </button>
         </header>
 
-        <!-- Menu de navegação principal (oculto em mobile por padrão) -->
         <nav id="main-menu" class="list-menu lg:flex lg:justify-center lg:space-x-4 lg:bg-transparent lg:shadow-none">
             <ul class="flex flex-col items-start p-4 space-y-4 text-lg">
                 <li>
-                    <a class="link-menu block p-4 lg:p-2 text-gray-700 hover:bg-yellow-400 hover:text-black transition duration-300 rounded"
-                        href="index.html">Itinerarios</a>
+                    <a class="link-menu block p-4 lg:p-2 text-gray-700 hover:bg-yellow-400 hover:text-black transition duration-300 rounded" href="index.html">Itinerarios</a>
                 </li>
                 <li>
-                    <a class="link-menu block p-4 lg:p-2 text-gray-700 hover:bg-yellow-400 hover:text-black transition duration-300 rounded"
-                        href="codigo.html">Códigos Itinerário</a>
+                    <a class="link-menu block p-4 lg:p-2 text-gray-700 hover:bg-yellow-400 hover:text-black transition duration-300 rounded" href="codigo.html">Códigos Itinerário</a>
                 </li>
             </ul>
         </nav>
 
-        <!-- Título e subtítulo da página (visível apenas em desktop) -->
         <h1 class="text-3xl sm:text-4xl font-bold text-blue-800 mt-8 hidden lg:block">Itinerários das linhas TCGL</h1>
-        <p class="text-gray-600 mt-2 hidden lg:block">Escolha uma linha para visualizar seu itinerário no Google Maps.
-        </p>
+        <p class="text-gray-600 mt-2 hidden lg:block">Escolha uma linha para visualizar seu itinerário no Google Maps. </p>
 
-        <!-- Seção principal do conteúdo, com um padding para não ficar por baixo do header fixo -->
         <main class="main-itinerarios p-4 sm:p-6 bg-white rounded-lg shadow-md mt-20">
 
-            <!-- Formulário para seleção da linha -->
             <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-6">
-                <select name="linhas" id="link"
-                    class="w-full sm:w-auto p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select name="linhas" id="link" class="w-full sm:w-auto p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="" selected>--ESCOLHA--</option>
                     <optgroup label="RADIAL">
                         <option
@@ -350,7 +336,7 @@
                             313 - Maria Lúcia</option>
                         <option
                               
-                            value="https://www.google.com/maps/d/embed?mid=1pbHSSBCTqey4PB0rbhoF2adWjEZGG-4&ehbc=2E312F">
+                            value="https://www.google.com/maps/d/u/0/embed?mid=1kQ_NeD9xynY_bjMsKxbDfWZfKXGC9UU&ehbc=2E312F">
                             319 - PUC</option>
                         <option
                             value="https://www.google.com/maps/d/u/0/embed?mid=1kQ_NeD9xynY_bjMsKxbDfWZfKXGC9UU&ehbc=2E312F">
@@ -501,31 +487,239 @@
                             932 - T. Vivi Xavier / T. oeste</option>
                     </optgroup>
                 </select>
+
                 <button id="abrirItinerario"
-                    class="w-full sm:w-auto p-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300">
+                    class="w-full sm:w-auto p-3 bg-blue-500 text-white rounded-lg shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out">
                     Abrir Itinerário
                 </button>
             </div>
 
-            <!-- Seção de avisos e informações -->
+            <div class="mt-8">
+                <h2 class="text-2xl font-bold text-center mb-6 text-blue-800">Trajeto ocioso para inicio de linha</h2>
+                <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-6">
+                    <select name="trajetos" id="linkTrajetoOcioso" class="w-full sm:w-auto p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="" selected>--ESCOLHA--</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1qiw3dZ2FbM_MB8ftYSzQvDQWC9GJbRg&ll">91 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1qiw3dZ2FbM_MB8ftYSzQvDQWC9GJbRg&ll">92 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1qiw3dZ2FbM_MB8ftYSzQvDQWC9GJbRg&ll">93 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1qiw3dZ2FbM_MB8ftYSzQvDQWC9GJbRg&ll">96 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1qiw3dZ2FbM_MB8ftYSzQvDQWC9GJbRg&ll">97 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1qiw3dZ2FbM_MB8ftYSzQvDQWC9GJbRg&ll">99 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1qiw3dZ2FbM_MB8ftYSzQvDQWC9GJbRg&ll">100 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">101 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=11hJTSsqcGmFDQCpgJmnDi0QdkcVHPUk">101 - Bairro Via Angelina</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=19wrh0Kv7ivfB_PdpQWft_p9PlGAN3dc">101 - Bairro Via Gino</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">102 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=11I3aKORRqQlGpcjF0McizlxgvpkAab0">102 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">103 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1zpyuWf835gjOB_NxEmy7C6IIhEy1sUE">103 - Bairro Via Mangaba</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1q5mSMoK2nYiGEoxbqBGPaCVTJTduNXY">103 - Bairro Via Monte Cristo</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">104 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1b3cMJeSsJygAdud1y4sYVsQ-yu-jFdU">104 - Bairro Via Morumbi</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1xeChWpVciyimKAub7m0zrDfUa1EHDBw">104 - Bairro Via S. Terezinha</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">106 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1KGEwmWBaCNSni8eL3IpNvAJp019vrLo">106 - Bairro Via Antares</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1KGEwmWBaCNSni8eL3IpNvAJp019vrLo">106 - Bairro Via HU</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">108 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1MfgnoActy5jbBA4Oemv0IBnP1U8olMg">108 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">109 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ePmwxe7v4XmRuD16bidpiKP8qrb1vy0&ll">109 - Rodoviária</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">110 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1kxRWxDW3FNIah7Qt7i7Qm_IidmsFgVo">110 - Bairro Via Centenário do Sul</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1d-Wl9XeQ2R0twSxJRidZjzBZfIeRMI8">110 - Bairro Via Londrina</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">111 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1_VnpumAABor-RnpQnSCb483Jhv3Unho">111 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">112 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1wGROsP4cYA3pmPk3Tvnr9pZNHg12WwI">112 - Bairro Via Laranjeiras</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1KGEwmWBaCNSni8eL3IpNvAJp019vrLo">112 - Bairro Via São João</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">113 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1wGROsP4cYA3pmPk3Tvnr9pZNHg12WwI">113 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1pGG2dPXdQu9sCuoXX0Edt2_aFIxTP2g">113 - Bairro Via Boulevard</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1pGG2dPXdQu9sCuoXX0Edt2_aFIxTP2g">113 - Bairro Via UTFPR</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">121 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1_g5eliU1k6vOamCSGrmvy4v0tYWpR8Q">121 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">200 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1zO7stfMp2cIm3CK3OTUzOwxfk1de4BA">200 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">301 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1D9k9-aup5DE4W2wqhPGvqIRkqGAPXVE">301 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">302 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1VfarH-Og553M0RXxZUqfaCsDryBQ-5c">302 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=19v6T4AWQoIOG1cXTHRwVzYYZG1a4kDk&ll">303 - TRO</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">303 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1-fVqdtA08IMbF2snP61HGMT9X0HsjKg">303 - Bairro Via Sent. T. Central</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1Gbq5OVjClVZ-OiTH4J0X1DayWcPY73k">303 - Bairro Via Sent. T. Oeste</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">305 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=14jwo_chFv9l7ASIIhzLIbRG-8qAxS90">305 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1N39Kni8IRgh2WgbrLLcOYDJkctQKl0o">305 - Bairro Via Aplicação</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">306 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">307 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=12tZXhJGImFy8GEwgn3kMleLB7EMRZC8">307 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">308 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=19v6T4AWQoIOG1cXTHRwVzYYZG1a4kDk&ll">308 - TRO</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1tRdY8to9NXsTbL70ngAinjZNCQfzVh0">308 - Bairro Via Graciosa</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=15fzq8dtlCYQdgclkPhypCazcakfFN7U">308 - Bairro Via Parecis</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=19v6T4AWQoIOG1cXTHRwVzYYZG1a4kDk&ll">309 - TRO</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1cwyyu6UXY76h3h7saHDdVqfbHxSaTXk">309 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1jumyTypSx8o4cm54XF70OFp3tyL5Xgg">309 - Bairro Via Cacique</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=10BZIB2z-yUnU4V1ktXPHUXUTCy7rkI8">309 - Bairro Via Trevo</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1qiw3dZ2FbM_MB8ftYSzQvDQWC9GJbRg&ll">310 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=19v6T4AWQoIOG1cXTHRwVzYYZG1a4kDk&ll">310 - TRO</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1tLj1u2HR5opa_D7xYZHaV11jLnB5n0w">310 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1qiw3dZ2FbM_MB8ftYSzQvDQWC9GJbRg&ll">311 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1s3lTm3i4HPEnjb13EgoWuXQ73hEzUd0">311 - Bairro Via Cajarana</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1jPH5qbirP92aRbf5vCuA6WN_0wUcEQc">311 - Bairro Via Carnascialli</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=19v6T4AWQoIOG1cXTHRwVzYYZG1a4kDk&ll">312 - TRO</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=18eWvBVvwECXOC-oRmObPW1J_PNjQsDA">312 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=19v6T4AWQoIOG1cXTHRwVzYYZG1a4kDk&ll">313 - TRO</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=16SqIoH4RCbOOoYsayrROnH1_WaZkI-g">313 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">314 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=12tZXhJGImFy8GEwgn3kMleLB7EMRZC8">314 - Bairro</option>
+                        <option value="">314 - Bairro Via Inicio A. Thomas Não tem mapa</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=11hmtaRNP_QMUXyJC5Jffcx59kz0iTck">314 - Bairro Via Inicio Col. Castaldi</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">315 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=16_ls1Zt8xON7qBrGectGuLy9rgfnspc">315 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">317 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1tN6sn15XItOZfH6vSmg6S0bFpErecdo">317 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1qiw3dZ2FbM_MB8ftYSzQvDQWC9GJbRg&ll">351 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=19v6T4AWQoIOG1cXTHRwVzYYZG1a4kDk&ll">351 - TRO</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">400 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">401 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1IC4Pl8rdQklykDf5fWPhd5MuUpeqB54">401 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">402 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1je56waQiplfyED-a9V4RKPq3Sje-F-w">402 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=10c0TXE7fwKBcLDD8-J4nx6Nre0bds54&ll">404 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1WeqG1Dx2xy5F3GuKU5rQhj2D1pQuIYY">404 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1qiw3dZ2FbM_MB8ftYSzQvDQWC9GJbRg&ll">405 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=10c0TXE7fwKBcLDD8-J4nx6Nre0bds54&ll">405 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1uGlvfwX32vY3hwHUxLoiWxYj4mki4qc">405 - Bairro Via A. Nogueira</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1uGlvfwX32vY3hwHUxLoiWxYj4mki4qc">405 - Bairro Via Gines Parra</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1qiw3dZ2FbM_MB8ftYSzQvDQWC9GJbRg&ll">406 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=10c0TXE7fwKBcLDD8-J4nx6Nre0bds54&ll">406 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1UrwoNyiV3AYi0nbTbg95v4W2cqVkKj0">406 - Bairro Via Aquiles</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1q2sZEwyGBk0F4IfggoilH2Z5j5-XaFA">406 - Bairro Via Luiz de Sá</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1qiw3dZ2FbM_MB8ftYSzQvDQWC9GJbRg&ll">407 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=10c0TXE7fwKBcLDD8-J4nx6Nre0bds54&ll">407 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1d3SSDUvUKT5eAb17vViGKAnLwz1PZkM">407 - Bairro Via João Paz</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=13VK4sk0Qy2C5w2mgw44-ibGBu9XujyU">407 - Bairro Via Semiramis</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1hvjDIcpGdo-h-YNeRoUUQKqxcIyCodU">407 - Bairro Via M. Tintas</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=12kaUqJAeITGpGwAGHLZC2orBrqRaI-4">407 - Bairro Via Spazio Lion</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1LjFkQKyiB3mVLP5gD_S-oi9-gIl0Hsk&ll">408 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1kUbJRfr2AArxM_PKIeUxVQnktwxYadE">408 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1XG91Dni-ruwR3xsxHsn4wGe_wRA2KOw&ll">412 - TOV</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1M6eUa5V3rGw_bY8lZWGAT-DLkTSegws">412 - Bairro Via H. Mandarino</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=12vHFoPBsafnv4H5caIPTGkpDi1VF4HQ">412 - Bairro Via Imagawa</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">413 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1OsluohXkJdV6I6A9jj4VaXpe7JkS0hU">413 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1XG91Dni-ruwR3xsxHsn4wGe_wRA2KOw&ll">414 - TOV</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1s12uostvxkPIO-ObycFSZDkrnGDpbv4">414 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=10c0TXE7fwKBcLDD8-J4nx6Nre0bds54&ll">415 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1gnXobyivpfQywEpnJEhqm-GfPDMYJ5M">415 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">417 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1nn5S1c-PPI-TptiaQvTlDEvh9VPwV3Q">417 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1Ot6FD8mHTwfb3gPPRSwE9gF_aTIVERg">417 - Bairro Via Hakme</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=10c0TXE7fwKBcLDD8-J4nx6Nre0bds54&ll">415 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=11Dm_h4-y2AojtusMbogxnRjdS64ei6U">418 - Bairro Via BRF</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1Cap9ymPSFKznkynlm_AycYTT8JXh0GA">418 - Bairro Via Chacaras</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1aOvvBt5hxmiHhMs2dL-nFp4YpGH_sGM">419 - Bairro Via Sent. TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=15zBt4OY3_WgwgwJn96vMq5wXF-I7lms">419 - Bairro Via Sent. TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=10c0TXE7fwKBcLDD8-J4nx6Nre0bds54&ll">419 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">419 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1AT-XK_aHukZC_4utIypiwEHjOJmzKsc">420 - Bairro Via IFPR</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=10c0TXE7fwKBcLDD8-J4nx6Nre0bds54&ll">420 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1XG91Dni-ruwR3xsxHsn4wGe_wRA2KOw&ll">420 - TOV</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">420 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=10c0TXE7fwKBcLDD8-J4nx6Nre0bds54&ll">421 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1XG91Dni-ruwR3xsxHsn4wGe_wRA2KOw&ll">421 - TOV</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">423 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1wZlTj4atEi8NDPdaMN-DV-W02TbGL5c">423 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">424 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1Vq3iZFdghwTIC7omGdZhKMKnhB7i1Yg">424 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">425 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1UrwoNyiV3AYi0nbTbg95v4W2cqVkKj0">425 - Bairro Via Amcor</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1__Uu_nnClLBPP-4Rk0aIhnwJgoDQI8U">425 - Bairro Via Flor de Lotus</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">426 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1R7LN7dJ_Gv1-Lsskola3_YC5hS7cc-g">426 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">427 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">428 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1fdV3SaIOc3gxMy9Fh4w92qQwflY4SGs">428 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1XG91Dni-ruwR3xsxHsn4wGe_wRA2KOw&ll">430 - TOV</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1B6X3WmhqRbZRxYdE9JyEIFun9GvD25M">430 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=10c0TXE7fwKBcLDD8-J4nx6Nre0bds54&ll">444 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1O0Ioh2aK6dbZvnQO9Iw-nDLMTy1HiFU">444 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=10c0TXE7fwKBcLDD8-J4nx6Nre0bds54&ll">445 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=10c0TXE7fwKBcLDD8-J4nx6Nre0bds54&ll">446 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1qiw3dZ2FbM_MB8ftYSzQvDQWC9GJbRg&ll">501 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">501 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1XSSgRu68_3bOLvy6DOYZALqwHJetxQo">501 - Bairro Via A. Boa Vista</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1qiw3dZ2FbM_MB8ftYSzQvDQWC9GJbRg&ll">502 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1XG91Dni-ruwR3xsxHsn4wGe_wRA2KOw&ll">502 - TOV</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1qiw3dZ2FbM_MB8ftYSzQvDQWC9GJbRg&ll">504 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=10c0TXE7fwKBcLDD8-J4nx6Nre0bds54&ll">504 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1NERfXlmNq_7OhGP90eZf6Vvz8wrm6pU">504 - Bairro Via M. Gavetti</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1qiw3dZ2FbM_MB8ftYSzQvDQWC9GJbRg&ll">505 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">505 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1qiw3dZ2FbM_MB8ftYSzQvDQWC9GJbRg&ll">512 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1XG91Dni-ruwR3xsxHsn4wGe_wRA2KOw&ll">512 - TOV</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=18ehzOIfjATU46ATJi_yXDeVbx5r4Bas">703 - Bairro Sentido Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1sPld5h20Bs-g1kJxyd6MeA6OI2OogWY">703 - Bairro Sentido Centro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1dig5_7jktPUoG4WXm6bQcJ2__sFvV3Q">706 - Bairro Sentido Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1sPld5h20Bs-g1kJxyd6MeA6OI2OogWY">706 - Bairro Sentido Centro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1Gd0a-AKlsSubl1TRc8sVpiTWr_cbZEo&ll">800 - TAC</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">800 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1JIQnmzk5RNAqmbY0tMYfp_Vltkc0tt8">800 - Bairro Via Centro - TAC</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1Z4QKaXGegtJhEz9iQIIXcej2MyJiGzg">800 - Bairro Via Centro - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1DQ4IgSqIOI0Fn53ecv6RP_Hwp3ApLwo">800 - Bairro Via Sercomtel</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1Gd0a-AKlsSubl1TRc8sVpiTWr_cbZEo&ll">801 - TAC</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">801 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">802 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1w7rzzh0z3b2LoTdYCucNII2uYhP4nzA">802 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1XUtGt2TF9CNfpreYBF2dJBlvA_rV2D0&ll">803 - TSH</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">803 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1AnDn3YTkoK-NumIGHyWQ2bVFDaCxlS8">803 - Bairro Via Aurora</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=19v6T4AWQoIOG1cXTHRwVzYYZG1a4kDk&ll">804 - TRO</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1XUtGt2TF9CNfpreYBF2dJBlvA_rV2D0&ll">804 - TSH</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1s3lTm3i4HPEnjb13EgoWuXQ73hEzUd0">804 - Bairro Via Cajarana</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1jPH5qbirP92aRbf5vCuA6WN_0wUcEQc">804 - Bairro Via Carnascialli</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1XUtGt2TF9CNfpreYBF2dJBlvA_rV2D0&ll">806 - TSH</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1DUULLjE5vPXCOFdFIuIjoI71SzEshIY">806 - Bairro Sentido Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=14jwo_chFv9l7ASIIhzLIbRG-8qAxS90">835 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">900 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1kDGnnQrmgwYyt2yAmg87upWuRJftY5A">900 - Bairro Via HU</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1AH-WVTbzwkWEWobt9v0DTI6GJUwRWsA">901 - Bairro Via Amcor</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1DUULLjE5vPXCOFdFIuIjoI71SzEshIY">901 - Bairro Via Saul Elkind</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1dig5_7jktPUoG4WXm6bQcJ2__sFvV3Q">901 - Bairro Via Gines Parra</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1jumyTypSx8o4cm54XF70OFp3tyL5Xgg">901 - Bairro Via Cacique</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">902 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1__Uu_nnClLBPP-4Rk0aIhnwJgoDQI8U">902 - Bairro Via Flor de Lotus</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZihnmMWr-zKaHV3-phKCN7j66p_BKKo">902 - Bairro Via Maritacas</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1Gd0a-AKlsSubl1TRc8sVpiTWr_cbZEo&ll">904 - TAC</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=19v6T4AWQoIOG1cXTHRwVzYYZG1a4kDk&ll">904 - TRO</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1XUtGt2TF9CNfpreYBF2dJBlvA_rV2D0&ll">904 - TSH</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">904 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1MiuAnm-e05lHs2HXPYKFjOeYmWt5UgA">904 - Bairro Via Sabara</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1DoDId2vZAj97eGuqlMB9M3X9xVhmhOk">913 - Bairro Sentido Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1XUtGt2TF9CNfpreYBF2dJBlvA_rV2D0&ll">913 - TSH</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=19v6T4AWQoIOG1cXTHRwVzYYZG1a4kDk&ll">931 - TRO</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1XG91Dni-ruwR3xsxHsn4wGe_wRA2KOw&ll">931 - TOV</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E96Sxo7T3g-gzyxRJJnq44J1bVWF3mk&ll">932 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1kDGnnQrmgwYyt2yAmg87upWuRJftY5A">Apae - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1Y_mPmsh09X1AB-iCoHnD-qV_O2aIFzs">G. Mirin - Bairro</option>
+                    </select>
+                    <button id="abrirTrajetoOcioso" class="w-full sm:w-auto p-3 bg-blue-500 text-white rounded-lg shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out">
+                        Abrir trajeto
+                    </button>
+                </div>
+            </div>
+
             <div class="mt-8 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 rounded-md">
-                <h2 class="text-xl font-bold mb-2">Algumas divergências nas linhas, por favor nos avise!</h2>
+                <h2 class="text-xl font-bold mb-2">Se houver alguma divergência nas linhas, por favor nos comunique!</h2>
                 <h3 class="text-lg">Este não é um site oficial da Grande Londrina, foi criado com o intuito de ajudar.
                     Se encontrar alguma divergência, procure:</h3>
-                <p class="font-bold text-gray-900 mt-2">Islan, Odair ou Will (3372-5222, 3372-5205, 3372-5206, 3372-5207)</p>
-            </div>
-
-            <div class="mt-4 p-2 bg-green-100 border-l-4 border-green-500 text-green-800 rounded-md">
-                <h2 class="text-lg font-semibold">OBS: Linhas em verde foram atualizadas recentemente</h2>
-            </div>
-
-            <div class="mt-4 p-2 bg-orange-100 border-l-4 border-orange-500 text-orange-800 rounded-md">
-                <h2 class="text-lg font-semibold">OBS: Linhas em laranjas foram corrigidas</h2>
+                <p class="font-bold text-gray-900 mt-2">Islan, Odair ou Will <br> 3372-5222, 3372-5205, 3372-5206, 3372-5207</p>
             </div>
 
         </main>
 
-        <!-- Script jQuery para abrir o link -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script>
             $(document).ready(function () {
@@ -540,19 +734,15 @@
             });
         </script>
 
-        <!-- JavaScript para o menu mobile atualizado -->
         <script src="script.js"></script>
 
-        <!-- Footer da página -->
         <footer class="text-center mt-10">
             <p class="text-sm text-gray-500">Will Felipi, Islan Jesus, Odair Marino © 2025 CIOP/TCGL<br> Todos os
-                direitos reservados.</p>
+                direitos
+                reservados.</p>
         </footer>
 
     </div>
 </body>
 
-
 </html>
-
-
