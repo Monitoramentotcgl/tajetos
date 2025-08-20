@@ -310,61 +310,6 @@ const extraBusLinesData = [
   "15 - HEMOCENTRO",
 ];
 
-// Função para análise da linha do ônibus
-function parseBusLine(line) {
-  line = line.trim();
-  let code = "";
-  let description = line;
-  const separatorIndex = line.indexOf(" - ");
-  if (separatorIndex !== -1) {
-    code = line.substring(0, separatorIndex).trim();
-    description = line.substring(separatorIndex + 3).trim();
-  }
-  return { code, description };
-}
-
-// Função para renderizar as linhas na tabela
-function renderBusLines(data, tbodyElement) {
-  tbodyElement.innerHTML = "";
-  data.forEach((lineString) => {
-    const { code, description } = parseBusLine(lineString);
-    const row = document.createElement("tr");
-    row.classList.add(
-      "hover:bg-gray-50",
-      "transition",
-      "duration-200",
-      "ease-in-out"
-    );
-    const codeCell = document.createElement("td");
-    codeCell.classList.add(
-      "p-4",
-      "font-bold",
-      "text-xl",
-      "text-blue-700",
-      "w-1/4",
-      "overflow-hidden",
-      "text-ellipsis",
-      "whitespace-nowrap"
-    );
-    const descriptionCell = document.createElement("td");
-    descriptionCell.classList.add(
-      "p-4",
-      "text-base",
-      "text-gray-700",
-      "w-3/4",
-      "whitespace-nowrap"
-    );
-
-    codeCell.textContent = code;
-    descriptionCell.textContent = description;
-
-    row.appendChild(codeCell);
-    row.appendChild(descriptionCell);
-    tbodyElement.appendChild(row);
-  });
-}
-
-// Função de filtro da tabela
 function filterTable() {
   const input = document.getElementById("searchInput");
   const filter = input.value.toUpperCase();
@@ -393,66 +338,32 @@ function filterTable() {
   });
 }
 
-// Evento para renderizar as tabelas quando a página carregar
-document.addEventListener("DOMContentLoaded", () => {
-  renderBusLines(mainBusLinesData, document.getElementById("mainBusList"));
-  renderBusLines(extraBusLinesData, document.getElementById("extraBusList")); // Lógica para o menu de navegação mobile
-
-  const openMenuCheckbox = document.getElementById("open-menu-all");
-  const listMenu = document.getElementById("main-menu");
-  const hamburguerIcon = document.getElementById("hamburguer-icon");
-  const closeIcon = document.getElementById("close-icon");
-  openMenuCheckbox.addEventListener("change", () => {
-    if (openMenuCheckbox.checked) {
-      // Se o checkbox está marcado, o menu está aberto
-      listMenu.classList.remove("hidden");
-      listMenu.classList.add(
-        "flex",
-        "flex-col",
-        "items-start",
-        "text-left",
-        "w-full",
-        "fixed",
-        "top-0",
-        "left-0",
-        "h-screen"
-      );
-      hamburguerIcon.classList.add("hidden");
-      closeIcon.classList.remove("hidden");
-    } else {
-      // Se o checkbox não está marcado, o menu está fechado
-      listMenu.classList.add("hidden");
-      listMenu.classList.remove(
-        "flex",
-        "flex-col",
-        "items-start",
-        "text-left",
-        "w-full",
-        "fixed",
-        "top-0",
-        "left-0",
-        "h-screen"
-      );
-      hamburguerIcon.classList.remove("hidden");
-      closeIcon.classList.add("hidden");
-    }
-  }); // Adiciona um evento de clique para fechar o menu ao clicar no "X"
-
-  closeIcon.addEventListener("click", () => {
-    openMenuCheckbox.checked = false;
-    openMenuCheckbox.dispatchEvent(new Event("change"));
-  }); // Adiciona um evento de clique para fechar o menu ao clicar em qualquer item da lista
-
-  const menuLinks = document.querySelectorAll("#main-menu a.link-menu");
-
-  menuLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      openMenuCheckbox.checked = false;
-      openMenuCheckbox.dispatchEvent(new Event("change"));
-    });
+// Função para popular a tabela com os dados das linhas
+function populateTable(tableId, data) {
+  const tableBody = document.getElementById(tableId);
+  data.forEach(item => {
+    const [id, ...descriptionParts] = item.split(" - ");
+    const description = descriptionParts.join(" - ");
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${id}</td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${description}</td>
+    `;
+    tableBody.appendChild(row);
   });
+}
+
+// Evento que carrega a função para popular as tabelas quando a página for carregada
+document.addEventListener("DOMContentLoaded", () => {
+  if (document.getElementById("busList")) {
+    populateTable("busList", mainBusLinesData);
+  }
+  if (document.getElementById("extraBusList")) {
+    populateTable("extraBusList", extraBusLinesData);
+  }
 });
 
+// JavaScript para o menu mobile
 document.addEventListener("DOMContentLoaded", () => {
   const menuBtn = document.getElementById("menuBtn");
   const mainMenu = document.getElementById("main-menu");
@@ -468,9 +379,29 @@ document.addEventListener("DOMContentLoaded", () => {
   // Ocultar o menu em telas maiores
   window.addEventListener("resize", () => {
     if (window.innerWidth >= 1024) {
-      // Ponto de quebra 'lg' do Tailwind
       mainMenu.classList.remove("is-open");
       menuBtn.classList.remove("menu-open");
     }
+  });
+
+  // Adicionar a lógica para o novo menu de seleção
+  const linkTrajetoOcioso = document.getElementById('linkTrajetoOcioso');
+  const abrirTrajetoOcioso = document.getElementById('abrirTrajetoOcioso');
+
+  linkTrajetoOcioso.addEventListener('change', () => {
+      const url = linkTrajetoOcioso.value;
+      if (url) {
+          abrirTrajetoOcioso.classList.remove('hidden');
+      } else {
+          abrirTrajetoOcioso.classList.add('hidden');
+      }
+  });
+
+  abrirTrajetoOcioso.addEventListener('click', (e) => {
+      e.preventDefault();
+      const url = linkTrajetoOcioso.value;
+      if (url) {
+          window.open(url, '_blank');
+      }
   });
 });
