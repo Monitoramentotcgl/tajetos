@@ -7,12 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Códigos do Itinerário</title>
 
-    <!-- Link para a fonte Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Link para o CDN do Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -30,7 +28,6 @@
         }
     </script>
 
-    <!-- CSS personalizado do código base para o menu sanduíche e dark mode -->
     <style>
         /* Estilos base para o ícone do menu sanduíche */
         .hamburger-icon span {
@@ -123,7 +120,7 @@
             }
 
             .hamburger-icon span {
-                background-color: #e0e0e0;
+                background-color: #fff;
             }
 
             .link-menu:hover {
@@ -201,10 +198,8 @@
 </head>
 
 <body class="bg-gray-100 text-gray-800 font-inter">
-    <!-- Container principal com largura responsiva -->
     <div class="container mx-auto max-w-4xl p-2 sm:p-6 md:p-8">
 
-        <!-- Header da página com o menu de navegação, com a nova estrutura -->
         <header class="fixed top-0 left-0 w-full bg-white shadow-md p-4 z-30 flex justify-between items-center">
             <div>
                 <h1 class="text-2xl sm:text-4xl font-bold text-blue-800">Códigos do Itinerário</h1>
@@ -218,43 +213,44 @@
             </button>
         </header>
 
-        <!-- Menu de navegação principal (oculto em mobile por padrão) -->
         <nav id="main-menu" class="list-menu lg:flex lg:justify-center lg:space-x-4 lg:bg-transparent lg:shadow-none">
             <ul class="flex flex-col items-start p-4 space-y-4 text-lg">
                 <li>
-                    <a class="link-menu block p-4 lg:p-2 text-gray-700 hover:bg-yellow-400 hover:text-black transition duration-300 rounded"
-                        href="index.html">Itinerarios</a>
+                    <a class="link-menu block p-4 lg:p-2 text-gray-700 hover:bg-yellow-400 hover:text-black transition duration-300 rounded" href="index.html">Itinerarios</a>
                 </li>
                 <li>
-                    <a class="link-menu block p-4 lg:p-2 text-gray-700 hover:bg-yellow-400 hover:text-black transition duration-300 rounded"
-                        href="codigo.html">Códigos Itinerário</a>
+                    <a class="link-menu block p-4 lg:p-2 text-gray-700 hover:bg-yellow-400 hover:text-black transition duration-300 rounded" href="codigo.html">Códigos Itinerário</a>
                 </li>
             </ul>
         </nav>
 
-        <!-- Seção principal do conteúdo, com um padding para não ficar por baixo do header fixo -->
-        <main class="mt-20">
+        <h1 class="text-3xl sm:text-4xl font-bold text-blue-800 mt-8 hidden lg:block">Códigos do Itinerário</h1>
+
+        <main class="main-itinerarios p-4 sm:p-6 bg-white rounded-lg shadow-md mt-20">
             <div class="fixed mb-6 sticky top-2 z-10 bg-gray-100 pt-5 pb-4 rounded-b-lg">
                 <input type="text" id="searchInput" onkeyup="filterTable()"
                     placeholder="Digite o código ou nome da linha..."
                     class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
 
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <table id="busTable" class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-blue-50">
-                        <tr>
-                            <th scope="col"
-                                class="px-2 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider">
-                                Código</th>
-                            <th scope="col"
-                                class="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider">
-                                Descrição</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200" id="mainBusList">
-                    </tbody>
-                </table>
+            <div class="mt-10">
+                <h2 class="text-2xl font-bold text-center mb-6 text-blue-800">Tabela de Códigos</h2>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <table id="busTable" class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-blue-50">
+                            <tr>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider">
+                                    Código</th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider">
+                                    Descrição</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200" id="busList">
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="mt-10">
