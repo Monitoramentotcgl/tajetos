@@ -29,12 +29,11 @@
     </script>
 
     <style>
-        /* Estilos base para o ícone do menu sanduíche */
+        /* Ícone hamburguer (apenas animações, cores via Tailwind) */
         .hamburger-icon span {
             display: block;
             width: 25px;
             height: 3px;
-            background-color: #333;
             border-radius: 2px;
             transition: all 0.3s ease;
         }
@@ -43,7 +42,6 @@
             margin: 5px 0;
         }
 
-        /* Animação para transformar o ícone de menu em um 'X' */
         .hamburger-icon.menu-open span:nth-child(1) {
             transform: translateY(8px) rotate(45deg);
         }
@@ -56,170 +54,50 @@
             transform: translateY(-8px) rotate(-45deg);
         }
 
-        /* Estilo do menu em mobile: oculto por padrão e animação de transição */
         .list-menu {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
+            width: 70%;
             height: 100vh;
-            background-color: white;
             transform: translateX(-100%);
             transition: transform 0.3s ease-in-out;
             z-index: 20;
-            /* Z-index para sobrepor o conteúdo */
             padding-top: 5rem;
-            /* Padding para evitar sobreposição do header fixo */
         }
 
-        /* Estilo para mostrar o menu quando a classe 'is-open' for adicionada */
         .list-menu.is-open {
             transform: translateX(0);
-        }
-
-        /* Estilos para Dark Mode (aplicados se o sistema preferir cores escuras) */
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-color: #1a1a1a;
-                color: #e0e0e0;
-            }
-
-            .main-itinerarios {
-                background-color: #2d2d2d;
-                box-shadow: 0 4px 6px -1px rgba(255, 255, 255, 0.1), 0 2px 4px -1px rgba(255, 255, 255, 0.06);
-            }
-
-            header {
-                background-color: #2d2d2d;
-                box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
-            }
-
-            .list-menu {
-                background-color: #2d2d2d;
-            }
-
-            .text-blue-800 {
-                color: #93c5fd;
-                /* Um azul mais claro para o modo escuro */
-            }
-
-            .text-gray-800 {
-                color: #e0e0e0;
-            }
-
-            .text-gray-700 {
-                color: #cccccc;
-            }
-
-            .text-gray-600 {
-                color: #b3b3b3;
-            }
-
-            .text-gray-500 {
-                color: #999999;
-            }
-
-            .hamburger-icon span {
-                background-color: #fff;
-            }
-
-            .link-menu:hover {
-                background-color: #4a5568;
-                color: #e0e0e0;
-            }
-
-            .bg-yellow-100 {
-                background-color: #4a4000;
-                border-color: #d69e2e;
-            }
-
-            .text-yellow-800 {
-                color: #f7e98d;
-            }
-
-            .bg-green-100 {
-                background-color: #143b14;
-                border-color: #38a169;
-            }
-
-            .text-green-800 {
-                color: #81c784;
-            }
-
-            .bg-orange-100 {
-                background-color: #4a2d1d;
-                border-color: #dd6b20;
-            }
-
-            .text-orange-800 {
-                color: #fbd38d;
-            }
-
-            select,
-            button {
-                background-color: #4a5568;
-                color: #e0e0e0;
-                border-color: #4a5568;
-            }
-
-            select:focus,
-            button:focus {
-                border-color: #63b3ed;
-                box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.5);
-            }
-
-            /* Estilos da barra de rolagem para dispositivos móveis em dark mode */
-            ::-webkit-scrollbar {
-                width: 16px;
-                height: 16px;
-            }
-
-            ::-webkit-scrollbar-track {
-                background: #2d2d2d;
-                border-radius: 10px;
-            }
-
-            ::-webkit-scrollbar-thumb {
-                background: #555;
-                border-radius: 16px;
-                border: 4px solid #2d2d2d;
-            }
-
-            ::-webkit-scrollbar-thumb:hover {
-                background: #888;
-            }
-
-            body {
-                scrollbar-width: auto;
-                scrollbar-color: #555 #2d2d2d;
-            }
         }
     </style>
 </head>
 
-<body class="bg-gray-100 text-gray-800 font-inter">
+<body class="bg-gray-100 text-gray-800 font-inter dark:bg-gray-900 dark:text-gray-100">
     <div class="container mx-auto max-w-4xl p-2 sm:p-6 md:p-8">
 
-        <header class="fixed top-0 left-0 w-full bg-white shadow-md p-4 z-30 flex justify-between items-center">
+        <header class="fixed top-0 left-0 w-full bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-700 p-4 z-30 flex justify-between items-center">
             <div>
-                <h1 class="text-2xl sm:text-4xl font-bold text-blue-800">Códigos do Itinerário</h1>
-                <p class="text-gray-600 mt-2 ">Consulte os códigos das linhas</p>
+                <h1 class="text-2xl sm:text-4xl font-bold text-blue-800 dark:text-blue-400">Códigos do Itinerário</h1>
+                <p class="text-gray-600 mt-2">Consulte os códigos das linhas</p>
             </div>
             <!-- Botão do menu sanduíche -->
             <button id="menuBtn" class="hamburger-icon p-2 focus:outline-none lg:hidden">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span class="bg-blue-500"></span>
+                <span class="bg-blue-500"></span>
+                <span class="bg-blue-500"></span>
             </button>
         </header>
 
-        <nav id="main-menu" class="list-menu lg:flex lg:justify-center lg:space-x-4 lg:bg-transparent lg:shadow-none">
-            <ul class="flex flex-col items-start p-4 space-y-4 text-lg">
+        <nav id="main-menu"
+            class="list-menu bg-white dark:bg-gray-800 lg:flex lg:justify-center lg:space-x-4 lg:bg-transparent lg:shadow-none">
+            <ul class="flex flex-col items-start mt-10 p-4 space-y-4 text-lg">
                 <li>
-                    <a class="link-menu block p-4 lg:p-2 text-gray-700 hover:bg-yellow-400 hover:text-black transition duration-300 rounded" href="index.html">Itinerarios</a>
+                    <a class="link-menu block p-4 lg:p-2 text-gray-700 dark:text-gray-200 hover:bg-yellow-400 hover:text-black transition duration-300 rounded"
+                        href="index.html">Itinerarios</a>
                 </li>
                 <li>
-                    <a class="link-menu block p-4 lg:p-2 text-gray-700 hover:bg-yellow-400 hover:text-black transition duration-300 rounded" href="codigo.html">Códigos Itinerário</a>
+                    <a class="link-menu block p-4 lg:p-2 text-gray-700 dark:text-gray-200 hover:bg-yellow-400 hover:text-black transition duration-300 rounded"
+                        href="codigo.html">Códigos Itinerário</a>
                 </li>
             </ul>
         </nav>
@@ -227,23 +105,23 @@
         <h1 class="text-3xl sm:text-4xl font-bold text-blue-800 mt-8 hidden lg:block">Códigos do Itinerário</h1>
 
         <main class="main-itinerarios p-4 sm:p-6 bg-white rounded-lg shadow-md mt-20">
-            <div class="fixed mb-6 sticky top-2 z-10 bg-gray-100 pt-5 pb-4 rounded-b-lg">
+            <div class="fixed text-center mb-6 sticky top-2 z-10 bg-gray-100 pt-5 pb-4 rounded-b-lg">
                 <input type="text" id="searchInput" onkeyup="filterTable()"
                     placeholder="Digite o código ou nome da linha..."
-                    class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    class="w-[80%] p-3 text-center border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
 
             <div class="mt-10">
-                <h2 class="text-2xl font-bold text-center mb-6 text-blue-800">Tabela de Códigos</h2>
+                <h2 class="text-2xl font-bold text-center mb-6 text-blue-800 dark:text-blue-400">Tabela de Códigos</h2>
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
                     <table id="busTable" class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-blue-50">
                             <tr>
                                 <th scope="col"
-                                    class="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-2 py-3 text-left text-lg font-medium text-gray-900 uppercase tracking-wider">
                                     Código</th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-2 py-3 text-left text-lg font-medium text-gray-900 uppercase tracking-wider">
                                     Descrição</th>
                             </tr>
                         </thead>
@@ -260,7 +138,7 @@
                         <thead class="bg-blue-50">
                             <tr>
                                 <th scope="col"
-                                    class="px-2 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider">
                                     Código</th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider">

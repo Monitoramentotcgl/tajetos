@@ -346,8 +346,8 @@ function populateTable(tableId, data) {
     const description = descriptionParts.join(" - ");
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${id}</td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${description}</td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">${id}</td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">${description}</td>
     `;
     tableBody.appendChild(row);
   });
@@ -405,3 +405,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   });
 });
+
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.classList.add('dark');
+}
