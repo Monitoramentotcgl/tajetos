@@ -346,8 +346,8 @@ function populateTable(tableId, data) {
     const description = descriptionParts.join(" - ");
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">${id}</td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">${description}</td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm dark:bg-gray-500 font-medium text-gray-800 dark:text-gray-100">${id}</td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm dark:bg-gray-500 text-gray-800 dark:text-gray-100">${description}</td>
     `;
     tableBody.appendChild(row);
   });
