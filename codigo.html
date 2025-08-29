@@ -75,16 +75,14 @@
 <body class="bg-gray-100 text-gray-800 font-inter dark:bg-gray-900 dark:text-gray-100">
     <div class="container mx-auto max-w-4xl p-2 sm:p-6 md:p-8">
 
-        <header class="fixed top-0 left-0 w-full bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-700 p-4 z-30 flex justify-between items-center">
-            <div>
-                <h1 class="text-2xl sm:text-4xl font-bold text-blue-800 dark:text-blue-400">Códigos do Itinerário</h1>
-                <p class="text-gray-600 mt-2">Consulte os códigos das linhas</p>
-            </div>
-            <!-- Botão do menu sanduíche -->
+        <!-- HEADER -->
+        <header
+            class="fixed top-0 left-0 w-full bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-700 p-4 z-30 flex justify-between items-center">
+            <h1 class="text-2xl sm:text-4xl font-bold text-blue-800 dark:text-blue-400">Itinerários das linhas TCGL</h1>
             <button id="menuBtn" class="hamburger-icon p-2 focus:outline-none lg:hidden">
-                <span class="bg-blue-500"></span>
-                <span class="bg-blue-500"></span>
-                <span class="bg-blue-500"></span>
+                <span class="bg-blue-500 dark:bg-sky-300"></span>
+                <span class="bg-blue-500 dark:bg-sky-300"></span>
+                <span class="bg-blue-500 dark:bg-sky-300"></span>
             </button>
         </header>
 
@@ -104,8 +102,8 @@
 
         <h1 class="text-3xl sm:text-4xl font-bold text-blue-800 mt-8 hidden lg:block">Códigos do Itinerário</h1>
 
-        <main class="main-itinerarios p-4 sm:p-6 bg-white rounded-lg shadow-md mt-20">
-            <div class="fixed text-center mb-6 sticky top-2 z-10 bg-gray-100 pt-5 pb-4 rounded-b-lg">
+        <main class="main-itinerarios p-4 sm:p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md mt-20">
+            <div class="fixed text-center text-gray-800 dark:text-gray-200 mb-6 sticky top-16 z-10 bg-gray-100 dark:bg-gray-700 pt-3 pb-3 rounded-lg">
                 <input type="text" id="searchInput" onkeyup="filterTable()"
                     placeholder="Digite o código ou nome da linha..."
                     class="w-[80%] p-3 text-center border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -115,13 +113,13 @@
                 <h2 class="text-2xl font-bold text-center mb-6 text-blue-800 dark:text-blue-400">Tabela de Códigos</h2>
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
                     <table id="busTable" class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-blue-50">
+                        <thead class="bg-blue-50 dark:bg-gray-700">
                             <tr>
                                 <th scope="col"
-                                    class="px-2 py-3 text-left text-lg font-medium text-gray-900 uppercase tracking-wider">
+                                    class="px-2 py-3 text-left text-lg font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider">
                                     Código</th>
                                 <th scope="col"
-                                    class="px-2 py-3 text-left text-lg font-medium text-gray-900 uppercase tracking-wider">
+                                    class="px-2 py-3 text-left text-lg font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider">
                                     Descrição</th>
                             </tr>
                         </thead>
@@ -132,16 +130,16 @@
             </div>
 
             <div class="mt-10">
-                <h2 class="text-2xl font-bold text-center mb-6 text-blue-800">Códigos Extra</h2>
+                <h2 class="text-2xl font-bold text-center mb-6 text-blue-800 dark:text-blue-400">Códigos Extra</h2>
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <table id="extraBusTable" class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-blue-50">
+                    <table id="extraBusTable" class="min-w-full divide-y divide-gray-400">
+                        <thead class="bg-blue-50 dark:bg-gray-700">
                             <tr>
                                 <th scope="col"
-                                    class="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-2 py-3 text-left text-lg font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider">
                                     Código</th>
                                 <th scope="col"
-                                    class="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider">
+                                    class="px-2 py-3 text-left text-lg font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider">
                                     Descrição</th>
                             </tr>
                         </thead>
