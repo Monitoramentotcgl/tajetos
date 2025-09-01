@@ -103,8 +103,10 @@
 
 
         <main class="main-itinerarios p-4 sm:p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md mt-20">
-            <h2 class="text-2xl font-bold text-center mb-2 text-blue-800 dark:text-blue-400">Itinerários das linhas TCGL</h2>
-            <p class="text-gray-600 dark:text-gray-200 m-2 text-center lg:block">Escolha uma linha para visualizar o itinerário no Google
+            <h2 class="text-2xl font-bold text-center mb-2 text-blue-800 dark:text-blue-400">Itinerários das linhas TCGL
+            </h2>
+            <p class="text-gray-600 dark:text-gray-200 m-2 text-center lg:block">Escolha uma linha para visualizar o
+                itinerário no Google
                 Maps</p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-6">
@@ -376,12 +378,14 @@
             </div>
 
             <div class="mt-8">
-                <h2 class="text-2xl font-bold text-center mb-2 text-blue-800 dark:text-blue-400">Trajeto ocioso para inicio de linha</h2>
-                <p class="text-gray-600 dark:text-gray-200 m-2 text-center lg:block">Escolha uma linha para visualizar seu trajeto de
+                <h2 class="text-2xl font-bold text-center mb-2 text-blue-800 dark:text-blue-400">Trajeto ocioso para
+                    inicio de linha</h2>
+                <p class="text-gray-600 dark:text-gray-200 m-2 text-center lg:block">Escolha uma linha para visualizar
+                    seu trajeto de
                     inicio </p>
                 <div
                     class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-6">
-                    <select name="trajetos" id="linkTrajetoOcioso"
+                    <select name="trajetosInicio" id="linkTrajetoOciosoInicio"
                         class="w-full sm:w-auto p-3 border border-gray-300 dark:text-gray-700 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="" selected>--ESCOLHA--</option>
                         <option value="https://www.google.com/maps/d/viewer?mid=1qiw3dZ2FbM_MB8ftYSzQvDQWC9GJbRg&ll">91
@@ -794,15 +798,404 @@
                         <option value="https://www.google.com/maps/d/viewer?mid=1Y_mPmsh09X1AB-iCoHnD-qV_O2aIFzs">G.
                             Mirin - Bairro</option>
                     </select>
-                    <button id="abrirTrajetoOcioso"
+                    <button id="abrirTrajetoOciosoInicio"
                         class="w-full sm:w-auto p-3 bg-blue-500 text-white rounded-lg shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out">
-                        Abrir trajeto
+                        Abrir trajeto inicio
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-8">
+                <h2 class="text-2xl font-bold text-center mb-2 text-blue-800 dark:text-blue-400">Trajeto ocioso de
+                    recolha para garagem</h2>
+                <p class="text-gray-600 dark:text-gray-200 m-2 text-center lg:block">Escolha uma linha para visualizar
+                    seu trajeto de recolha para a garagem</p>
+                <div
+                    class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-6">
+                    <select name="trajetosRecolha" id="linkTrajetoOciosoRecolha"
+                        class="w-full sm:w-auto p-3 border border-gray-300 dark:text-gray-700 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="" selected>--ESCOLHA--</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1WNLhxD0iCdb5_s0hcub-sybHzFUvjnk">
+                            91 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1WNLhxD0iCdb5_s0hcub-sybHzFUvjnk">
+                            92 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1WNLhxD0iCdb5_s0hcub-sybHzFUvjnk">
+                            93 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1WNLhxD0iCdb5_s0hcub-sybHzFUvjnk">
+                            96 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1WNLhxD0iCdb5_s0hcub-sybHzFUvjnk">
+                            97 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1WNLhxD0iCdb5_s0hcub-sybHzFUvjnk">
+                            99 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1WNLhxD0iCdb5_s0hcub-sybHzFUvjnk">
+                            100 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            101 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1R5KrxcwmHHQ9fFMyC3FHn9gILl7BYgQ">
+                            101 - Bairro - Angelina</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=145sdAR3VOJgYfSSn7KHgbz7VZAv0dNM">
+                            101 - Bairro - Gino</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            102 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1E7VDDw2KWf_5e5ZJhhE9Bylk_GmOV44">
+                            102 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            103 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1J3eJaEADCKKj2U77KAD_JfZR8z9N4z0">
+                            103 - Bairro - Mangaba</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1x-Bc8xNNEBoeoIZLMgSez-Pa9iXzHDQ">
+                            103 - Bairro - Monte Cristo</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            103 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            104 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1lh2s1da3L0uVb7mV_9fk1IEqMeT2kpQ">
+                            104 - Bairro - Morumbi</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1gPDZTgeqN4fBJz2_XgNO4qR_l1Hea9A">
+                            104 - Bairro - S. Terezinha</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            106 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=16LbB_hbwytNbZ4OSjxarWniKfjKsC1k">
+                            106 - Bairro - Antares</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=16LbB_hbwytNbZ4OSjxarWniKfjKsC1k">
+                            106 - Bairro - HU</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            108 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ovNmv4ZfDrgpxDW7gQ7OysRdIVSTr9w">
+                            108 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1WNLhxD0iCdb5_s0hcub-sybHzFUvjnk">
+                            109 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            109 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            110 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1vRx1iCOYUpQhfPBGdmC9J4c0yTmuyQE">
+                            110 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            111 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1DRn0TpOsFmojVlgMreZBRgH1NY0srvs">
+                            111 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            112 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=16LbB_hbwytNbZ4OSjxarWniKfjKsC1k">
+                            112 - Bairro - Laranjeiras</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=16fl4mXtA5VF9JQas17YcjIwqh-GHcxY">
+                            112 - Bairro - São João</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            113 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1YIEGOJuRr1CRUvS6GrKvvUgpX-0-Kt8">
+                            113 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            121 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1fZxA5yyfEx8c8Q0azk2Me3HNNeL-e2g">
+                            121 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            200 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=10utWa5L9JKJ6qQrSB23TdDGENoIqBbs">
+                            200 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            301 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1Q5900SQIbaEP6Wc6zyx_qGtoCZ-Z4ys">
+                            301 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            302 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1JBJMSIprQ2xTUJoPSFGGKKBSg0kcxmo">
+                            302 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1sHaWFHYEf1PMLAHPdUPU61IrWOH-i38">
+                            303 - TRO</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            303 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1j8nhGQFyIwDyFFegF0bNFRSXYsRAcw4">
+                            303 - Bairro - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            305 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=11N7M0jtiFy6eFrxQOvbKYN3Vbru5Kp8">
+                            305 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1EGMbARqIUYE26C5TyH9elU2OcqWRlGQ">
+                            305 - Bairro - Aplicação</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=11N7M0jtiFy6eFrxQOvbKYN3Vbru5Kp8">
+                            305 - Bairro - Reitoria</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=11N7M0jtiFy6eFrxQOvbKYN3Vbru5Kp8">
+                            305 - Bairro - Expresso</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            305 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            306 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1QQs3-DrVT2deMZGqvJUZx05sBwa9oaE">
+                            306 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            307 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=14LgK5es1CpcBmSTJMMl7mlT9hhXjOmw">
+                            307 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            308 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1sHaWFHYEf1PMLAHPdUPU61IrWOH-i38">
+                            308 - TRO</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1f5zrx-OtqKxbx_uyz0LDwWxWhP08lgk">
+                            308 - Bairro - Graciosa</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1G_9UFxiLN4IBKgcK33EPgJxvyRXLmGw">
+                            308 - Bairro - Parecis</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1sHaWFHYEf1PMLAHPdUPU61IrWOH-i38">
+                            309 - TRO</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1M2skLnLOW9o3Yhvpvs1_1R2alJypbLc">
+                            309 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1WNLhxD0iCdb5_s0hcub-sybHzFUvjnk">
+                            310 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1sHaWFHYEf1PMLAHPdUPU61IrWOH-i38">
+                            310 - TRO</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1WNLhxD0iCdb5_s0hcub-sybHzFUvjnk">
+                            311 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1Wlz8P5BDawoEyoxBjAnIa-oMCKmkbQI">
+                            311 - Bairro - Cajarana</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=17OWpisjA5SLJy4PWz3EV8COaRpm1boY">
+                            311 - Bairro - Carnascialli</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1sHaWFHYEf1PMLAHPdUPU61IrWOH-i38">
+                            312 - TRO</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1sHaWFHYEf1PMLAHPdUPU61IrWOH-i38">
+                            313 - TRO</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1FEqS_UbUQT1Li0TQKBI1fYO72DhAg0s">
+                            313 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            314 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=14LgK5es1CpcBmSTJMMl7mlT9hhXjOmw">
+                            314 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            315 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1M_fhSoEPd5ulq_uQZCptl2sL1LgT6_s">
+                            315 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            317 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=14LgK5es1CpcBmSTJMMl7mlT9hhXjOmw">
+                            317 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1WNLhxD0iCdb5_s0hcub-sybHzFUvjnk">
+                            351 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1sHaWFHYEf1PMLAHPdUPU61IrWOH-i38">
+                            351 - TRO</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            400 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1wRiOcQq8g-NSk5awsz7MQ_3XWhdPQ2Y">
+                            400 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            401 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1oV8i-aS6cJJrTwYTVh4RyV4NT9BUk5E">
+                            401 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            402 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=10PVJkm2v5orb9G4ZjiDOQndOBVp_OeQ">
+                            402 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1kEwlQQomj10caNdP-OyB5cd0Jrnc9ks">
+                            404 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=16yvhI-aUGrfQERJ3iMXeMmC96oeSCY8">
+                            404 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1WNLhxD0iCdb5_s0hcub-sybHzFUvjnk">
+                            405 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1kEwlQQomj10caNdP-OyB5cd0Jrnc9ks">
+                            405 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1vSLOvzS1R_V-NxglMtuhShLUY8Qsec8">
+                            405 - Bairro - A. Nogueira</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1vSLOvzS1R_V-NxglMtuhShLUY8Qsec8">
+                            405 - Bairro - Gines Parra</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1WNLhxD0iCdb5_s0hcub-sybHzFUvjnk">
+                            406 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1kEwlQQomj10caNdP-OyB5cd0Jrnc9ks">
+                            406 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1graDeWvhi1hGlcWwRv_9V1GsLKwajwU">
+                            406 - Bairro - Aquiles</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1wAmXGUse9Vhy8QZE18LH-lLzei0r_t4">
+                            406 - Bairro - Luiz de Sá</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1WNLhxD0iCdb5_s0hcub-sybHzFUvjnk">
+                            407 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1kEwlQQomj10caNdP-OyB5cd0Jrnc9ks">
+                            407 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=16zJnR7Rhl-uRUKvjbtbqvy5G_RfJyqc">
+                            407 - Bairro - João Paz</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1v1ehW5VLBZlI3ZSXiab53BpgJKUigPY">
+                            407 - Bairro - Semiramis</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1THg7Jm37lbdSwH1hh7RrL0b_QnqKKII">
+                            408 - TCS</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1jWXMl6jlFUW8npZW_qM_nQTlLpsd_d8">
+                            408 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1evkrVZgvGnZNNThsBGPZ0kJlHZsyUwg">
+                            412 - TOV</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1tc56vYl5gED3S2uCV7Icd6_s9IvDkr0">
+                            412 - Bairro - H. Mandarino</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ekCW72EEYi4JG6fPFXts-co3mGay3N4">
+                            412 - Bairro - Imagawa</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            413 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1OBytq5qk8Gx1ZPR3ZpTAc3Xoww1VF18">
+                            413 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1evkrVZgvGnZNNThsBGPZ0kJlHZsyUwg">
+                            414 - TOV</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1FIiDUBMJY-FM50efXhwrG7g32J4p2SY">
+                            414 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1kEwlQQomj10caNdP-OyB5cd0Jrnc9ks">
+                            415 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1zPuuUR8jmiKJeGYBmC9WLtfbxIAdVU4">
+                            415 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            417 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1TUITUnIBHL7lAILohGaBxcZo0KsRjzY">
+                            417 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1kEwlQQomj10caNdP-OyB5cd0Jrnc9ks">
+                            415 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1cyGn7iNHGdTqS5oXN48JL_f8U19VBiY">
+                            418 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1kEwlQQomj10caNdP-OyB5cd0Jrnc9ks">
+                            419 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            419 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1uV75XjEtAD8bkAFN24ETtewXdHe5kiw">
+                            420 - Bairro - IFPR</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1kEwlQQomj10caNdP-OyB5cd0Jrnc9ks">
+                            420 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1evkrVZgvGnZNNThsBGPZ0kJlHZsyUwg">
+                            420 - TOV</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            420 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1kEwlQQomj10caNdP-OyB5cd0Jrnc9ks">
+                            421 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            423 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1OnHw2C9AEfRWiwpOfTq_MeYZ4ipynO0">
+                            423 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            424 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            425 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1TUITUnIBHL7lAILohGaBxcZo0KsRjzY">
+                            425 - Bairro - Amcor</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1KkFwW9kpV94_NRUy_UFKS0jyp5HnpVE">
+                            425 - Bairro - Flor de Lotus</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            426 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1dmgBjstKG97CUXQec2vN7eglTVrbjmg">
+                            426 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            427 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            428 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1YgSTwq_DjAfNX7ZE7XP9BWdXQY1l9Qg">
+                            428 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1evkrVZgvGnZNNThsBGPZ0kJlHZsyUwg">
+                            430 - TOV</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1dpJQNq9fMYvnjDkqitxaEt6c9YUeou4">
+                            430 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1kEwlQQomj10caNdP-OyB5cd0Jrnc9ks">
+                            444 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1kEwlQQomj10caNdP-OyB5cd0Jrnc9ks">
+                            445 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1kEwlQQomj10caNdP-OyB5cd0Jrnc9ks">
+                            446 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1WNLhxD0iCdb5_s0hcub-sybHzFUvjnk">
+                            501 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            501 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1WNLhxD0iCdb5_s0hcub-sybHzFUvjnk">
+                            502 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1evkrVZgvGnZNNThsBGPZ0kJlHZsyUwg">
+                            502 - TOV</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1Vy36gWCq8-oHzG054vLJlvr0Jd0TVJk">
+                            502 - Bairro - Jd Américas</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1WNLhxD0iCdb5_s0hcub-sybHzFUvjnk">
+                            504 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1kEwlQQomj10caNdP-OyB5cd0Jrnc9ks">
+                            504 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1WNLhxD0iCdb5_s0hcub-sybHzFUvjnk">
+                            505 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            505 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1WNLhxD0iCdb5_s0hcub-sybHzFUvjnk">
+                            512 - TCI</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1evkrVZgvGnZNNThsBGPZ0kJlHZsyUwg">
+                            512 - TOV</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1vSLOvzS1R_V-NxglMtuhShLUY8Qsec8">
+                            703 - Bairro - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1hR51Eb-5NGDpSBekWkTOBi4sEXJizTg">
+                            703 - Bairro - Centro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1xw7ANPElge-BqPmeQJwr_Vax8ft78PI">
+                            706 - Bairro - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1Gc_f1snO-nk2dnl3HPRdwFO9gfYfMYA">
+                            706 - Bairro - Centro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1fM_WrAhKXMWWp9bCPtBxjoPz3lz2V6c">
+                            800 - TAC</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            800 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1A6Wo5MHT5QuDAc5saMf0zNNv2oeDTs8">
+                            800 - Bairro - Higienópolis</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ClS5hS8FK4pDjr52crimVTeAnamUf44">
+                            800 - Bairro - Quintino</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1fM_WrAhKXMWWp9bCPtBxjoPz3lz2V6c">
+                            801 - TAC</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            801 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            802 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1Yl1qrsyyDK2iyY5YR7fDgqR-l5AiaKE">
+                            802 - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1zZgPG-AvungXX2_Qp3qDhgdSuKMF0E0">
+                            803 - TSH</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            803 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1sHaWFHYEf1PMLAHPdUPU61IrWOH-i38">
+                            804 - TRO</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1zZgPG-AvungXX2_Qp3qDhgdSuKMF0E0">
+                            804 - TSH</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1zZgPG-AvungXX2_Qp3qDhgdSuKMF0E0">
+                            806 - TSH</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1Mmo3CruhICPoB0SDAb0A6AUWynBphSg">
+                            806 - Bairro - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1kEwlQQomj10caNdP-OyB5cd0Jrnc9ks">
+                            835 - TMG</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            900 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1f2Btc_pZpvTVdeni7TfHSM7-mqMt324">
+                            900 - Bairro - HU</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1Mmo3CruhICPoB0SDAb0A6AUWynBphSg">
+                            901 - Bairro - Saul Elkind</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1graDeWvhi1hGlcWwRv_9V1GsLKwajwU">
+                            901 - Bairro - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1UPC-_zxfQPVh_pjV8UjUkiw0nQc1Ibs">
+                            901 - Bairro - Cacique</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            900 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1KkFwW9kpV94_NRUy_UFKS0jyp5HnpVE">
+                            902 - Bairro - Flor de Lotus</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1fM_WrAhKXMWWp9bCPtBxjoPz3lz2V6c">
+                            904 - TAC</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1sHaWFHYEf1PMLAHPdUPU61IrWOH-i38">
+                            904 - TRO</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1zZgPG-AvungXX2_Qp3qDhgdSuKMF0E0">
+                            904 - TSH</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            904 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=16LbB_hbwytNbZ4OSjxarWniKfjKsC1k">
+                            913 - Bairro - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1zZgPG-AvungXX2_Qp3qDhgdSuKMF0E0">
+                            913 - TSH</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=11N7M0jtiFy6eFrxQOvbKYN3Vbru5Kp8">
+                            913 - Bairro - UEL</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1sHaWFHYEf1PMLAHPdUPU61IrWOH-i38">
+                            931 - TRO</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1ZnlCy7cgmDenV--GaSK-B0ZJQbIX4sQ">
+                            932 - TVX</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1BscG7ocSdDsWTeQtv-pqJ9du26EgKbg">
+                            932 - Bairro - UEL</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=1f2Btc_pZpvTVdeni7TfHSM7-mqMt324">
+                            Apae - Bairro</option>
+                        <option value="https://www.google.com/maps/d/viewer?mid=18TYM6oyJE10v2qSbEzmKpOGm25czwc0">
+                            G. Mirin - Bairro</option>
+                    </select>
+                    <button id="abrirTrajetoOciosoRecolha"
+                        class="w-full sm:w-auto p-3 bg-blue-500 text-white rounded-lg shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out">
+                        Abrir trajeto recolha
                     </button>
                 </div>
             </div>
 
             <div class="mt-8 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 rounded-md">
-                <h2 class="text-xl font-bold mb-2">Se houver alguma divergência nas informações, por favor nos comunique!
+                <h2 class="text-xl font-bold mb-2">Se houver alguma divergência nas informações, por favor nos
+                    comunique!
                 </h2>
                 <h3 class="text-lg">Este não é um site oficial da Grande Londrina, foi criado com o intuito de ajudar.
                     Se encontrar alguma divergência, procure:</h3>

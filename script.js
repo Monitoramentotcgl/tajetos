@@ -385,27 +385,51 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Adicionar a lógica para o novo menu de seleção
-  const linkTrajetoOcioso = document.getElementById('linkTrajetoOcioso');
-  const abrirTrajetoOcioso = document.getElementById('abrirTrajetoOcioso');
+  const linkTrajetoOciosoInicio = document.getElementById('linkTrajetoOciosoInicio');
+  const abrirTrajetoOciosoInicio = document.getElementById('abrirTrajetoOciosoInicio');
 
-  linkTrajetoOcioso.addEventListener('change', () => {
-      const url = linkTrajetoOcioso.value;
+  linkTrajetoOciosoInicio.addEventListener('change', () => {
+      const url = linkTrajetoOciosoInicio.value;
       if (url) {
-          abrirTrajetoOcioso.classList.remove('hidden');
+          abrirTrajetoOciosoInicio.classList.remove('hidden');
       } else {
-          abrirTrajetoOcioso.classList.add('hidden');
+          abrirTrajetoOciosoInicio.classList.add('hidden');
       }
   });
 
-  abrirTrajetoOcioso.addEventListener('click', (e) => {
+  abrirTrajetoOciosoInicio.addEventListener('click', (e) => {
       e.preventDefault();
-      const url = linkTrajetoOcioso.value;
+      const url = linkTrajetoOciosoInicio.value;
+      if (url) {
+          window.open(url, '_blank');
+      }
+  });
+
+    const linkTrajetoOciosoRecolha = document.getElementById('linkTrajetoOciosoRecolha');
+  const abrirTrajetoOciosoRecolha = document.getElementById('abrirTrajetoOciosoRecolha');
+
+  linkTrajetoOciosoRecolha.addEventListener('change', () => {
+      const url = linkTrajetoOciosoRecolha.value;
+      if (url) {
+          abrirTrajetoOciosoRecolha.classList.remove('hidden');
+      } else {
+          abrirTrajetoOciosoRecolha.classList.add('hidden');
+      }
+  });
+
+  abrirTrajetoOciosoRecolha.addEventListener('click', (e) => {
+      e.preventDefault();
+      const url = linkTrajetoOciosoRecolha.value;
       if (url) {
           window.open(url, '_blank');
       }
   });
 });
 
-if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-  document.documentElement.classList.add('dark');
-}
+
+
+
+
+// if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+//   document.documentElement.classList.add('dark');
+// }
