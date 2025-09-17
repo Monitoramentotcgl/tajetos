@@ -312,6 +312,7 @@ const extraBusLinesData = [
   "14 - FELIZ DIA DO TRABALHO",
   "15 - HEMOCENTRO",
   "16 - CENTRASIL",
+  "17 - VIA OURO VERDE",
 ];
 
 function filterTable() {
