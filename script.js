@@ -292,7 +292,8 @@ const mainBusLinesData = [
   "292 - TESTE",
   "293 - TERMINAL CENTRAL",
   "294 - PREVENCAO CANCER DE MAMA",
-  "995 - PARABENS LONDRINA"
+  "995 - PARABENS LONDRINA",
+  "996 - 826-CARNAVAL/ ZERAO"
 ];
 
 const extraBusLinesData = [
