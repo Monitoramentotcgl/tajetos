@@ -1,172 +1,465 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Códigos do Itinerário</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Códigos do Itinerário – TCGL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue:#1e3a8a; --blue-mid:#2563eb; --blue-light:#dbeafe; --blue-lighter:#eff6ff;
+      --text:#1e293b; --muted:#64748b; --border:#e2e8f0; --bg:#f1f5f9; --white:#ffffff;
+      --sidebar:220px; --amber-border:#d97706;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body { font-family: "Inter", sans-serif; background: var(--bg); color: var(--text); overflow: hidden; display: flex; flex-direction: column; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    /* ── DESKTOP ── */
+    .desktop-shell { display: flex; height: 100vh; overflow: hidden; }
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        inter: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        'custom-green-50': '#e0f2f2',
-                        'custom-green-100': '#f9fafb',
-                    }
-                }
-            }
-        }
-    </script>
+    .sidebar { width: var(--sidebar); background: var(--blue); display: flex; flex-direction: column; flex-shrink: 0; overflow-y: auto; }
+    .sidebar-logo { padding: 18px 16px 14px; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .sidebar-logo h1 { color: #fff; font-size: 15px; font-weight: 600; line-height: 1.3; }
+    .sidebar-logo p  { color: #93c5fd; font-size: 11px; margin-top: 3px; }
+    .sidebar-nav { padding: 8px 0; flex: 1; }
+    .nav-section { padding: 10px 16px 4px; font-size: 9px; color: #60a5fa; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; }
+    .nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 16px; font-size: 13px; color: #bfdbfe; text-decoration: none; transition: background .15s; }
+    .nav-item svg { width: 17px; height: 17px; stroke: #93c5fd; flex-shrink: 0; }
+    .nav-item:hover { background: rgba(255,255,255,.08); }
+    .nav-item.active { background: rgba(255,255,255,.15); color: #fff; font-weight: 500; }
+    .nav-item.active svg { stroke: #fff; }
+    .sidebar-footer { padding: 12px 16px; border-top: 1px solid rgba(255,255,255,.1); }
+    .sidebar-footer p { font-size: 10px; color: #60a5fa; line-height: 1.6; }
 
-    <style>
-        /* Ícone hamburguer (apenas animações, cores via Tailwind) */
-        .hamburger-icon span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
+    .d-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    .d-topbar { background: var(--white); border-bottom: 1px solid var(--border); padding: 11px 20px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+    .d-topbar-title { font-size: 16px; font-weight: 600; color: var(--blue); }
+    .d-topbar-sub   { font-size: 12px; color: var(--muted); margin-top: 1px; }
+    .badge { background: var(--blue-light); color: var(--blue); border-radius: 6px; font-size: 11px; font-weight: 500; padding: 4px 10px; }
 
-        .hamburger-icon span:nth-child(2) {
-            margin: 5px 0;
-        }
+    .d-content { flex: 1; padding: 14px; overflow: hidden; display: flex; }
+    .panel { flex: 1; background: var(--white); border: 1px solid var(--border); border-radius: 12px; display: flex; flex-direction: column; overflow: hidden; }
+    .panel-top { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; flex-shrink: 0; flex-wrap: wrap; }
 
-        .hamburger-icon.menu-open span:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
-        }
+    .toggle-group { display: flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .toggle-btn { padding: 7px 16px; font-size: 13px; font-weight: 500; cursor: pointer; color: var(--muted); background: var(--bg); border: none; font-family: inherit; transition: all .15s; }
+    .toggle-btn.active { background: var(--blue); color: #fff; }
 
-        .hamburger-icon.menu-open span:nth-child(2) {
-            opacity: 0;
-        }
+    .search-wrap { flex: 1; min-width: 200px; }
+    .search-wrap input { width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; font-family: inherit; background: var(--bg); color: var(--text); outline: none; }
+    .search-wrap input:focus { border-color: var(--blue-mid); background: var(--white); }
 
-        .hamburger-icon.menu-open span:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
-        }
+    .table-area { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; padding: 16px; }
+    .section-title { font-size: 14px; font-weight: 600; color: var(--blue); margin-bottom: 8px; }
+    .update-badge { font-size: 11px; color: var(--muted); font-weight: 400; margin-left: 8px; }
+    table { width: 100%; border-collapse: collapse; }
+    thead th { padding: 8px 12px; text-align: left; font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; background: var(--bg); border-bottom: 1px solid var(--border); }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background .1s; }
+    tbody tr:hover { background: var(--blue-lighter); }
+    tbody tr.hidden-row { display: none; }
+    td { padding: 9px 12px; font-size: 13px; }
+    td:first-child { font-weight: 600; color: var(--blue); width: 80px; }
 
-        .list-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 70%;
-            height: 100vh;
-            transform: translateX(-100%);
-            transition: transform 0.3s ease-in-out;
-            z-index: 20;
-            padding-top: 5rem;
-        }
+    /* ── MOBILE ── */
+    .mobile-shell { display: none; flex-direction: column; height: 100vh; overflow: hidden; }
+    .m-header { background: var(--blue); padding: 13px 16px; flex-shrink: 0; }
+    .m-header h1 { color: #fff; font-size: 16px; font-weight: 600; }
+    .m-header p  { color: #93c5fd; font-size: 11px; margin-top: 2px; }
 
-        .list-menu.is-open {
-            transform: translateX(0);
-        }
-    </style>
+    .m-panel-top { padding: 10px 12px; background: var(--white); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; flex-shrink: 0; flex-wrap: wrap; }
+    .m-toggle-group { display: flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .m-toggle-btn { padding: 6px 14px; font-size: 12px; font-weight: 500; cursor: pointer; color: var(--muted); background: var(--bg); border: none; font-family: inherit; transition: all .15s; }
+    .m-toggle-btn.active { background: var(--blue); color: #fff; }
+    .m-search { flex: 1; min-width: 140px; }
+    .m-search input { width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; font-family: inherit; background: var(--bg); color: var(--text); outline: none; }
+
+    .m-table-area { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; padding: 12px; background: var(--bg); }
+    .m-section-title { font-size: 13px; font-weight: 600; color: var(--blue); margin-bottom: 6px; }
+    .m-table-wrap { background: var(--white); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+    .m-table-wrap table { width: 100%; border-collapse: collapse; }
+    .m-table-wrap thead th { padding: 8px 10px; text-align: left; font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; background: var(--bg); border-bottom: 1px solid var(--border); }
+    .m-table-wrap tbody tr { border-bottom: 1px solid var(--border); }
+    .m-table-wrap tbody tr.hidden-row { display: none; }
+    .m-table-wrap td { padding: 8px 10px; font-size: 12px; }
+    .m-table-wrap td:first-child { font-weight: 600; color: var(--blue); width: 52px; }
+
+    .m-tabbar { display: flex; background: var(--white); border-top: 1px solid var(--border); flex-shrink: 0; }
+    .m-tabbar-item { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 8px 4px 6px; cursor: pointer; color: var(--muted); border-top: 2px solid transparent; text-decoration: none; }
+    .m-tabbar-item svg  { width: 22px; height: 22px; stroke: currentColor; }
+    .m-tabbar-item span { font-size: 10px; margin-top: 3px; font-weight: 500; }
+    .m-tabbar-item.active { color: var(--blue); border-top-color: var(--blue); }
+
+    @media (max-width: 768px) {
+      .desktop-shell { display: none; }
+      .mobile-shell  { display: flex; }
+    }
+  </style>
 </head>
+<body>
 
-<body class="bg-gray-100 text-gray-800 font-inter dark:bg-gray-900 dark:text-gray-100">
-    <div class="container mx-auto max-w-4xl p-2 sm:p-6 md:p-8">
-
-        <!-- HEADER -->
-        <header
-            class="fixed top-0 left-0 w-full bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-700 p-4 z-30 flex justify-between items-center">
-            <h1 class="text-2xl sm:text-4xl font-bold text-blue-800 dark:text-blue-400">Itinerários das linhas TCGL</h1>
-            <button id="menuBtn" class="hamburger-icon p-2 focus:outline-none lg:hidden">
-                <span class="bg-blue-500 dark:bg-sky-300"></span>
-                <span class="bg-blue-500 dark:bg-sky-300"></span>
-                <span class="bg-blue-500 dark:bg-sky-300"></span>
-            </button>
-        </header>
-
-        <!-- NAVBAR -->
-        <nav id="main-menu"
-            class="list-menu bg-white dark:bg-gray-800 lg:static lg:transform-none lg:w-full lg:h-auto lg:block lg:mt-10 lg:pt-1 lg:shadow-md">
-            <ul
-                class="flex flex-col lg:flex-row lg:justify-center lg:space-x-12 items-start lg:items-center mt-0 p-0 lg:p-2 space-y-4 lg:space-y-0 text-lg">
-                <li>
-                    <a class="link-menu block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-yellow-400 hover:text-black transition duration-300 rounded"
-                        href="index.html">Itinerarios</a>
-                </li>
-                <li>
-                    <a class="link-menu block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-yellow-400 hover:text-black transition duration-300 rounded"
-                        href="codigo.html">Códigos Itinerário - Atualizado</a>
-                </li>
-                <li>
-                    <a class="link-menu block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-yellow-400 hover:text-black transition duration-300 rounded"
-                        href="codigoDesat.html">Códigos Itinerário - Antigo</a>
-                </li>
-            </ul>
-        </nav>
-
-        <h1 class="text-3xl sm:text-4xl font-bold text-blue-800 dark:text-blue-400 mt-8 hidden lg:block">Códigos do Itinerário</h1>
-
-        <main class="main-itinerarios p-4 sm:p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md mt-10">
-            <div class="fixed text-center text-gray-800 dark:text-gray-200 mb-6 sticky top-16 z-10 bg-gray-100 dark:bg-gray-700 pt-3 pb-3 rounded-lg">
-                <input type="text" id="searchInput" onkeyup="filterTable()"
-                    placeholder="Digite o código ou nome da linha..."
-                    class="w-[80%] p-3 text-center border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-
-            <div class="mt-10">
-                <h2 class="text-2xl font-bold text-center text-blue-800 dark:text-blue-400">Tabela de Códigos</h2>
-                <div class="text-md font-bold text-center m-4 text-blue-700 dark:text-blue-300">Atualizado 23/04/2026</div>
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <table id="busTable" class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-blue-50 dark:bg-gray-700">
-                            <tr>
-                                <th scope="col"
-                                    class="px-2 py-3 text-left text-lg font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider">
-                                    Código</th>
-                                <th scope="col"
-                                    class="px-2 py-3 text-left text-lg font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider">
-                                    Descrição</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200" id="busList">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="mt-10">
-                <h2 class="text-2xl font-bold text-center mb-6 text-blue-800 dark:text-blue-400">Códigos Extra</h2>
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <table id="extraBusTable" class="min-w-full divide-y divide-gray-400">
-                        <thead class="bg-blue-50 dark:bg-gray-700">
-                            <tr>
-                                <th scope="col"
-                                    class="px-2 py-3 text-left text-lg font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider">
-                                    Código</th>
-                                <th scope="col"
-                                    class="px-2 py-3 text-left text-lg font-medium text-gray-700 dark:text-gray-200 uppercase tracking-wider">
-                                    Descrição</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200" id="extraBusList">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </main>
-
-        <footer class="text-center mt-10">
-            <p class="text-sm text-gray-500">Will Felippi, Islan Jesus, Odair Marino © 2025 CIOP/TCGL<br> Todos os
-                direitos
-                reservados.</p>
-        </footer>
-
+<!-- ══ DESKTOP ══ -->
+<div class="desktop-shell">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <h1>Itinerários TCGL</h1>
+      <p>CIOP / Grande Londrina</p>
     </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">Consulta</div>
+      <a href="index.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+        Itinerários
+      </a>
+      <a href="index.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        Trajetos Ociosos
+      </a>
+      <a href="codigo.html" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8M8 8h5M8 16h3"/></svg>
+        Códigos
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <p>Will Felippi, Islan Jesus<br>Odair Marino © 2025<br>CIOP/TCGL</p>
+    </div>
+  </aside>
 
-    <script src="script.js"></script>
+  <div class="d-main">
+    <div class="d-topbar">
+      <div>
+        <div class="d-topbar-title">Códigos do Itinerário</div>
+        <div class="d-topbar-sub">Tabela de códigos das linhas TCGL</div>
+      </div>
+      <span class="badge">Atualizado 23/04/2026</span>
+    </div>
+    <div class="d-content">
+      <div class="panel">
+        <div class="panel-top">
+          <div class="toggle-group">
+            <button class="toggle-btn active" onclick="switchVersion('atual')">Atualizado</button>
+            <button class="toggle-btn"        onclick="switchVersion('antigo')">Antigo</button>
+          </div>
+          <div class="search-wrap">
+            <input type="text" id="d-search" placeholder="Buscar código ou descrição..." oninput="filterCodes('d')">
+          </div>
+        </div>
+        <div class="table-area" id="d-table-area"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
+<!-- ══ MOBILE ══ -->
+<div class="mobile-shell">
+  <div class="m-header">
+    <h1>Códigos do Itinerário</h1>
+    <p>CIOP / Grande Londrina</p>
+  </div>
+  <div class="m-panel-top">
+    <div class="m-toggle-group">
+      <button class="m-toggle-btn active" onclick="switchVersion('atual')">Atualizado</button>
+      <button class="m-toggle-btn"        onclick="switchVersion('antigo')">Antigo</button>
+    </div>
+    <div class="m-search">
+      <input type="text" id="m-search" placeholder="Buscar..." oninput="filterCodes('m')">
+    </div>
+  </div>
+  <div class="m-table-area" id="m-table-area"></div>
+  <div class="m-tabbar">
+    <a href="index.html" class="m-tabbar-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+      <span>Itinerários</span>
+    </a>
+    <a href="index.html" class="m-tabbar-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      <span>Ociosos</span>
+    </a>
+    <a href="codigo.html" class="m-tabbar-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8M8 8h5M8 16h3"/></svg>
+      <span>Códigos</span>
+    </a>
+  </div>
+</div>
+
+<script>
+const dataAtual = {
+  main: [
+    "1 - 81-EPESMEL","2 - 81-RECOLHE","3 - 86-APAE","4 - 86-RECOLHE","5 - 87-GUARDA MIRIM",
+    "6 - 87-RECOLHE","7 - 91-CORUJÃO PARIGOT","8 - 91 - RECOLHE","9 - 92-CORUJAO W HAUER",
+    "10 - 92 - RECOLHE","11 - 93-CORUJAO A STENGHEL","12 - 93- RECOLHE","13 - 96-CORUJAO G PIRES",
+    "14 - 96- RECOLHE","15 - 97-CORUJAO AVELINO VIEIRA","16 - 97- RECOLHE","17 - 99-CORUJAO S FRANCISCO",
+    "18 - 99- RECOLHE","19 - 100-ALEMANHA","20 - 100-ALEMANHA/ CEASA","21 - 100-RECOLHE",
+    "22 - 101-N AMPARO/ G. TAMIOZZO","23 - 101-N AMPARO/ A. VEZOZZO","24 - 101-RECOLHE",
+    "25 - 102-IDEAL","26 - 102-IDEAL / CEARA","27 - 102-P ANCHIETA","28 - 102-RECOLHE",
+    "29 - 103-SANTA FE/ NOEL ROSA","30 - 103-SANTA FE/ MANGABA","31 - 103-RECOLHE",
+    "32 - 104-INTERLAGOS/ MORUMBI","33 - 104-INTERLAGOS/ STA TEREZINHA","34 - 104-RECOLHE",
+    "35 - 106-G PIRES/ ANTARES","36 - 106-G PIRES/ HU","37 - 106-RECOLHE","38 - 107-ARAGARCA",
+    "39 - 107-RECOLHE","40 - 108-ALBATROZ","41 - 108-RECOLHE","42 - 109-RODOVIARIA / BOULEVARD",
+    "43 - 109-RECOLHE","44 - 110-MR THOMAS","45 - 110-MR THOMAS/ EUCALIPTOS",
+    "46 - 110-MR THOMAS/ AV LONDRINA","47 - 110-RECOLHE","48 - 111-EUCALIPTOS",
+    "49 - 111-EUCALIPTOS/ ROMANA","50 - 111-RECOLHE","51 - 112-A URBANAS/ SAO JOAO",
+    "52 - 112-A URBANAS/ LARANJEIRAS","53 - 112-RECOLHE","54 - 113-TAUA","55 - 113-UTF-PR",
+    "56 - 113-ATE | BOULEVARD","57 - 113-RECOLHE","58 - 121 - TRES FIGUEIRAS","59 - 121- RECOLHE",
+    "60 - 200- BRASIL","61 - 200- RECOLHE","62 - 301- PRESIDENTE","63 - 301- RECOLHE",
+    "64 - 302- HEDI","65 - 302- RECOLHE","66 - 303-TOKIO | SENT. CENTRAL","67 - 303-TOKIO | SENT. OESTE",
+    "68 - 303- RECOLHE","69 - 305 - CAMPUS","70 - 305-CAMPUS/ REITORIA","71 - 305-EXPRESSO/ UEL-CAMPUS",
+    "72 - 305-APLICAÇÃO","73 - 305-RECOLHE","74 - 306- CIDADE UNIVERSITARIA","75 - 306- RECOLHE",
+    "76 - 307-A VIEIRA","77 - 307-RECOLHE","78 - 308-BANDEIRANTES/GRACIOSA",
+    "79 - 308-BANDEIRANTES/ PARECIS","80 - 308- RECOLHE","81 - 309-NEY BRAGA",
+    "82 - 309-NEY BRAGA/ FAST FRIO","83 - 309-NEY BRAGA/ PUC","84 - 309-NEY BRAGA | ATE TREVO",
+    "85 - 309-ALLAMANDAS","86 - 309- RECOLHE","87 - 310-JD DO SOL","88 - 310- RECOLHE",
+    "89 - 311-SANTA RITA/ CARNASCIALLI","90 - 311-SANTA RITA/ CAJARANA",
+    "91 - 311-S EXPRESSO/ CARNASCIALLI","92 - 311–S EXPRESSO /CAJARANA","93 - 311- RECOLHE",
+    "94 - 312-STO ANDRE","95 - 312- RECOLHE","96 - 313-MARIA LUCIA","97 - 313- RECOLHE",
+    "98 - 314-OLIMPICO","99 - 314- OLIMPICO | ESCOLINHA","100 - 314 - RECOLHE",
+    "101 - 315-COLUMBIA/ SABARA 3/ PQ UNIVERSI.","102 - 315- RECOLHE","103 - 317-MARACANA",
+    "104 - 317- RECOLHE","105 - 351-PARADOR / T. OESTE","106 - 351- LONDRINA MATSURI",
+    "107 - 351-RECOLHE","108 - 360-EXPOSICAO","109 - 360-RECOLHE","110 - 400-PARIGOT",
+    "111 - 400-RECOLHE","112 - 401-CH NEWTON","113 - 401-CH NEWTON/ MARIA CELINA",
+    "114 - 401- RECOLHE","115 - 402-VIVI XAVIER","116 - 402-RECOLHE","117 - 404- HEIMTAL",
+    "118 - 404- RECOLHE","119 - 405-M CECILIA/ GINES PARRA","120 - 405-M CECILIA/ A NOGUEIRA",
+    "121 - 405-S EXPRESSO/ GINES PARRA","122 - 405-S EXPRESSO/ A NOGUEIRA","123 - 405- RECOLHE",
+    "124 - 406-A STENGHEL/ AQUILES","125 - 406-A STENGHEL/ LUIZ DE SA",
+    "126 - 406-A STENGHEL/ AQUILES/ HAKME","127 - 406-A STENGHEL/ LUIZ DE SA/ HAKME",
+    "128 - 406-S EXPRESSO/ AQUILES","129 - 406-S EXPRESSO/ LUIZ DE SA","130 - 406- RECOLHE",
+    "131 - 407-JOAO PAZ / BAIRRO","132 - 407-JOAO PAZ/ TERMINAL","133 - 407-SEMIRAMIS/ BAIRRO",
+    "134 - 407-SEMIRAMIS/ TERMINAL","135 - 407-AMAPA/ TERMINAL","136 - 407-M TINTAS/ GAVETTI",
+    "137 - 407- RECOLHE","138 - 408-RECREIO","139 - 408-RECREIO/ FABRICAS","140 - 408- RECOLHE",
+    "143 - 410-SANTUARIO","144 - 412-MANDARINO/ IMAGAWA","145 - 412-MANDARINO/ H MANDARINO",
+    "146 - 412-RECOLHE","147 - 413- RES DO CAFÉ","148 - 413- RECOLHE","149 - 414-NOVA OLINDA",
+    "150 - 414-NOVA OLINDA/ ACACIA","151 - 414- RECOLHE","152 - 415- ITAPOA","153 - 415- RECOLHE",
+    "154 - 417-CATUAI","155 - 417-JD DA SAUDADE","156 - 417- RECOLHE","157 - 418-CHACARAS",
+    "158 - 418-RECOLHE","159 - 419-TERMINAL GAVETTI VIVI","160 - 419- RECOLHE",
+    "161 - 420-SENTIDO NORTE SHOP","162 - 420-SENTIDO T VIVI XAVIER",
+    "163 - 420-NORTE SHOP/ T VIVI XAVIER","164 - 420- ATE IFPR","165 - 420- RECOLHE",
+    "166 - 421-JD. ALPES","167 - 421-RECOLHE","168 - 422-MARIA CELINA","169 - 422- RECOLHE",
+    "170 - 423-SÃO JORGE","171 - 423- RECOLHE","172 - 424-MARISTELA","173 - 424-RECOLHE",
+    "174 - 425-CID. INDUSTRIAL/SAUL ELKIND","175 - 425-CID. INDUSTRIAL","176 - 425-RECOLHE",
+    "177 - 426-PARIS","178 - 426-RECOLHE","179 - 427-VIVI - WARTA","180 - 427-RECOLHE",
+    "181 - 428-VISTA BELA","182 - 428-RECOLHE","183 - 430-FLOR DE LOTUS/TERM. OURO VER",
+    "184 - 430-RECOLHE","185 - 431-ESTADIO DO CAFÉ","186 - 431-VGD","187 - 431-RECOLHE",
+    "188 - 432-CIDADE INDUSTRIAL","189 - 432-RECOLHE","190 - 444- WARTA","191 - 444- RECOLHE",
+    "192 - 445- FELICIDADE","193 - 445- RECOLHE","194 - 446-T GAVETTI/ NORTE SHOPPING",
+    "195 - 446- RECOLHE","196 - 447-F DO CAMPO","197 - 447-F DO CAMPO | CHACARAS",
+    "198 - 447-RECOLHE","199 - 448-BRF","200 - 448-RECOLHE","201 - 449-LITUANIA",
+    "202 - 449-RECOLHE","203 - 501-PARADOR","204 - 501-PARADOR/ A BOA VISTA","205 - 501- RECOLHE",
+    "206 - 502-PARADOR OURO VERDE","207 - 502-ATE RES. DAS AMERICAS","208 - 502-RECOLHE",
+    "209 - 504-PARADOR MILTON GAVETTI","210 - 504- RECOLHE","211 - 505-EXPRESSO | T VIVI XAVIER",
+    "212 - 505- RECOLHE","213 - 512-T. O VERDE","214 - 512- RECOLHE",
+    "215 - 703-RAPIDO AQUILES-CENTRO","216 - 703-RAPIDO/ ATE GAVETTI","217 - 703-RECOLHE",
+    "218 - 706-RAPIDO MARIA CECILIA","219 - 706-RAPIDO/ ATE GAVETTI","220 - 706- RECOLHE",
+    "221 - 800-VIVI XAVIER/ ACAPULCO","222 - 800-VIVI XAVIER/ ENC QUINTINO",
+    "223 - 800-VIVI XAVIER/ E HIGIENOPOLIS","224 - 800-VIVI XAVIER/ PIAUI",
+    "225 - 800-CENTRO/ ACAPULCO","226 - 800-ATE PIO XII","227 - 800- RECOLHE",
+    "228 - 801-VIVI XAVIER/ CENTRO CIVICO","229 - 801- RECOLHE",
+    "230 - 802-VIVI XAVIER/ BANDEIRANTES","231 - 802- RECOLHE",
+    "232 - 803-VIVI XAVIER/ SHOP CATUAI","233 - 803- RECOLHE","234 - 804- T OESTE/ G PALHANO",
+    "235 - 804- SHOP CATUAI/ G PALHANO","236 - 804- RECOLHE","237 - 806-S ELKIND/ SHOP CATUAI",
+    "238 - 806- RECOLHE","239 - 825-LONDRINATAL|SENT. SAUL ELKIND","240 - 825-LONDRINATAL|SENT. CATUAI",
+    "241 - 825-RECOLHE","242 - 835-UEL/ MILTON GAVETTI","243 - 835- RECOLHE",
+    "244 - 900-HU/POUPATEMPO/BOULEVARD","245 - 900- RECOLHE","246 - 901-SENTIDO 5 CONJUNTOS",
+    "247 - 901-SENTIDO CACIQUE","248 - 901-CACIQUE/ ENC VIVI XAVIER","249 - 901- RECOLHE",
+    "250 - 902-PADOVANI","251 - 902-MARITACAS","252 - 902- RECOLHE","253 - 904-ACAPULCO/ BAND",
+    "254 - 904-ACAPULCO/ ARTHUR T","255 - 904-VIVI XAVIER/ BAND","256 - 904-VIVI XAVIER/ARTHUR T",
+    "257 - 904- ATE T OESTE","258 - 904- ATE SHOP CATUAI","259 - 904 - ATE BANDEIRANTES",
+    "260 - 904- RECOLHE","261 - 908-ACAPULCO EXPOSICAO","262 - 908-RECOLHE",
+    "263 - 913-G PALHANO/ ROBERT KOCH","264 - 913-G PALHANO/ ATE UEL","265 - 913- RECOLHE",
+    "266 - 931-SHOP NORTE","267 - 931-OURO VERDE","268 - 931-T OESTE","269 - 931- RECOLHE",
+    "270 - 932-VIVI XAVIER/TOESTE/ATE UEL","271 - 932- RECOLHE",
+    "272 - 934-JUNHO VERMELHO | T. CENTR","273 - 934-JUNHO VERMELHO | T. OESTE","274 - 934-RECOLHE",
+    "275 - ATE ACAPULCO","276 - ATE T OESTE","277 - ATE GAVETTI","278 - ATE OURO VERDE",
+    "279 - ATE VIVI XAVIER","280 - ATE SHOP CATUAI","281 - ATLAS","282 - BRATAC","283 - ESPECIAL",
+    "284 - EXPO JAPAO","285 - CENTRO DE EVENTOS","286 - EXPOSIÇAO","287 - CHACARA SINTVEST",
+    "288 - EXPRESSO","289 - HAKME","290 - HEMOCENTRO","291 - RESERVA TERMINAIS",
+    "292 - MANUTENÇAO","293 - VESTIBULAR","294 - TREINAMEN7O","295 - TESTE",
+    "296 - TERMINAL CENTRAL","297 - PREVENCAO CANCER DE MAMA","298 - 826-CARNAVAL/ ZERAO",
+    "995 - PARABENS LONDRINA"
+  ],
+  extra: [
+    "1 - GRANDE LONDRINA","2 - PARABENS LONDRINA","3 - FELIZ NATAL","4 - FELIZ ANO NOVO",
+    "5 - FELIZ PASCOA","6 - FELIZ DIA DOS PAIS","7 - FELIZ DIA DAS MAES",
+    "8 - FELIZ DIA DAS CRIANCAS","9 - FELIZ DIA DOS PROFESSORES","10 - FELIZ DIA DO PADROEIRO",
+    "11 - FELIZ DIA DO TRABALHO","12 - HEMOCENTRO","13 - CENTRASIL","14 - VIA OURO VERDE",
+    "15 - CIOP","16 - VAI TUBARAO","17 - LEC CAMPEAO"
+  ]
+};
+
+const dataAntigo = {
+  main: [
+    "1 - 81-EPESMEL","2 - 81-RECOLHE","3 - 86-APAE","4 - 86-RECOLHE","5 - 87-GUARDA MIRIM",
+    "6 - 87-RECOLHE","7 - 91-CORUJÃO PARIGOT","8 - 91 - RECOLHE","9 - 92-CORUJAO W HAUER",
+    "10 - 92 - RECOLHE","11 - 93-CORUJAO A STENGHEL","12 - 93- RECOLHE","13 - 96-CORUJAO G PIRES",
+    "14 - 96- RECOLHE","15 - 97-CORUJAO AVELINO VIEIRA","16 - 97- RECOLHE","17 - 99-CORUJAO S FRANCISCO",
+    "18 - 99- RECOLHE","19 - 100-ALEMANHA","20 - 100-ALEMANHA/ CEASA","21 - 100-RECOLHE",
+    "22 - 101-N AMPARO/ G. TAMIOZZO","23 - 101-N AMPARO/ A. VEZOZZO","24 - 101-RECOLHE",
+    "25 - 102-IDEAL","26 - 102-IDEAL / CEARA","27 - 102-P ANCHIETA","28 - 102-RECOLHE",
+    "29 - 103-SANTA FE/ NOEL ROSA","30 - 103-SANTA FE/ MANGABA","31 - 103-RECOLHE",
+    "32 - 104-INTERLAGOS/ MORUMBI","33 - 104-INTERLAGOS/ STA TEREZINHA","34 - 104-RECOLHE",
+    "35 - 106-G PIRES/ ANTARES","36 - 106-G PIRES/ HU","37 - 106-RECOLHE","38 - 107-ARAGARCA",
+    "39 - 107-RECOLHE","40 - 108-ALBATROZ","41 - 108-RECOLHE","42 - 109-RODOVIARIA / BOULEVARD",
+    "43 - 109-RECOLHE","44 - 110-MR THOMAS","45 - 110-MR THOMAS/ EUCALIPTOS",
+    "46 - 110-MR THOMAS/ AV LONDRINA","47 - 110-RECOLHE","48 - 111-EUCALIPTOS",
+    "49 - 111-EUCALIPTOS/ ROMANA","50 - 111-RECOLHE","51 - 112-A URBANAS/ SAO JOAO",
+    "52 - 112-A URBANAS/ LARANJEIRAS","53 - 112-RECOLHE","54 - 113-TAUA","55 - 113-UTF-PR",
+    "56 - 113-ATE | BOULEVARD","57 - 113-RECOLHE","58 - 121 - TRES FIGUEIRAS","59 - 121- RECOLHE",
+    "60 - 200- BRASIL","61 - 200- RECOLHE","62 - 301- PRESIDENTE","63 - 301- RECOLHE",
+    "64 - 302- HEDI","65 - 302- RECOLHE","66 - 303-TOKIO | SENT. CENTRAL","67 - 303-TOKIO | SENT. OESTE",
+    "68 - 303- RECOLHE","69 - 305 - CAMPUS","70 - 305-CAMPUS/ REITORIA","71 - 305-EXPRESSO/ UEL-CAMPUS",
+    "72 - 305-APLICAÇÃO","73 - 305-RECOLHE","74 - 306- CIDADE UNIVERSITARIA","75 - 306- RECOLHE",
+    "76 - 307-A VIEIRA","77 - 307-RECOLHE","78 - 308-BANDEIRANTES/GRACIOSA",
+    "79 - 308-BANDEIRANTES/ PARECIS","80 - 308- RECOLHE","81 - 309-NEY BRAGA",
+    "82 - 309-NEY BRAGA/ FAST FRIO","83 - 309-NEY BRAGA/ PUC","84 - 309-NEY BRAGA | ATE TREVO",
+    "85 - 309-ALLAMANDAS","86 - 309- RECOLHE","87 - 310-JD DO SOL","88 - 310- RECOLHE",
+    "89 - 311-SANTA RITA/ CARNASCIALLI","90 - 311-SANTA RITA/ CAJARANA",
+    "91 - 311-S EXPRESSO/ CARNASCIALLI","92 - 311–S EXPRESSO /CAJARANA","93 - 311- RECOLHE",
+    "94 - 312-STO ANDRE","95 - 312- RECOLHE","96 - 313-MARIA LUCIA","97 - 313- RECOLHE",
+    "98 - 314-OLIMPICO","99 - 314- OLIMPICO | ESCOLINHA","100 - 314 - RECOLHE",
+    "101 - 315-COLUMBIA/ SABARA 3/ PQ UNIVERSI.","102 - 315- RECOLHE","103 - 317-MARACANA",
+    "104 - 317- RECOLHE","105 - 351-PARADOR / T. OEST","106 - 351- LONDRINA MATSURI",
+    "107 - 351-RECOLHE","108 - 360-EXPOSICAO","109 - 360-RECOLHE","110 - 400-PARIGOT",
+    "111 - 400-RECOLHE","112 - 401-CH NEWTON","113 - 401-CH NEWTON/ MARIA CELINA",
+    "114 - 401- RECOLHE","115 - 402-VIVI XAVIER","116 - 402-RECOLHE","117 - 404- HEIMTAL",
+    "118 - 404- RECOLHE","119 - 405-M CECILIA/ GINES PARRA","120 - 405-M CECILIA/ A NOGUEIRA",
+    "121 - 405-S EXPRESSO/ GINES PARRA","122 - 405-S EXPRESSO/ A NOGUEIRA","123 - 405- RECOLHE",
+    "124 - 406-A STENGHEL/ AQUILES","125 - 406-A STENGHEL/ LUIZ DE SA",
+    "126 - 406-A STENGHEL/ AQUILES/ HAKME","127 - 406-A STENGHEL/ LUIZ DE SA/ HAKME",
+    "128 - 406-S EXPRESSO/ AQUILES","129 - 406-S EXPRESSO/ LUIZ DE SA","130 - 406- RECOLHE",
+    "131 - 407-JOAO PAZ / BAIRRO","132 - 407-JOAO PAZ/ TERMINAL","133 - 407-SEMIRAMIS/ BAIRRO",
+    "134 - 407-SEMIRAMIS/ TERMINAL","135 - 407-AMAPA/ TERMINAL","136 - 407-M TINTAS/ GAVETTI",
+    "137 - 407- RECOLHE","138 - 408-RECREIO","139 - 408-RECREIO/ FABRICAS","140 - 408- RECOLHE",
+    "143 - 410-SANTUARIO","144 - 412-MANDARINO/ IMAGAWA","145 - 412-MANDARINO/ H MANDARINO",
+    "146 - 412-RECOLHE","147 - 413- RES DO CAFÉ","148 - 413- RECOLHE","149 - 414-NOVA OLINDA",
+    "150 - 414-NOVA OLINDA/ ACACIA","151 - 414- RECOLHE","152 - 415- ITAPOA","153 - 415- RECOLHE",
+    "154 - 417-CATUAI","155 - 417-JD DA SAUDADE","156 - 417- RECOLHE","157 - 418-CHACARAS",
+    "158 - 418-RECOLHE","159 - 419-TERMINAL GAVETTI VIVI","160 - 419- RECOLHE",
+    "161 - 420-SENTIDO NORTE SHOP","162 - 420-SENTIDO T VIVI XAVIER",
+    "163 - 420-NORTE SHOP/ T VIVI XAVIER","164 - 420- ATE IFPR","165 - 420- RECOLHE",
+    "166 - 421-JD. ALPES","167 - 421-RECOLHE","168 - 422-MARIA CELINA","169 - 422- RECOLHE",
+    "170 - 423-SÃO JORGE","171 - 423- RECOLHE","172 - 424-MARISTELA","173 - 424-RECOLHE",
+    "174 - 425-CID. INDUSTRIAL/SAUL ELKIND","175 - 425-CID. INDUSTRIAL","176 - 425-RECOLHE",
+    "177 - 426-PARIS","178 - 426-RECOLHE","179 - 427-VIVI - WARTA","180 - 427-RECOLHE",
+    "181 - 428-VISTA BELA","182 - 428-RECOLHE","183 - 430-FLOR DE LOTUS/TERM. OURO VER",
+    "184 - 430-RECOLHE","185 - 431-ESTADIO DO CAFÉ","186 - 431-VGD","187 - 431-RECOLHE",
+    "188 - 432-CIDADE INDUSTRIAL","189 - 432-RECOLHE","190 - 444- WARTA","191 - 444- RECOLHE",
+    "192 - 445- FELICIDADE","193 - 445- RECOLHE","194 - 446-T GAVETTI/ NORTE SHOPPING",
+    "195 - 446- RECOLHE","196 - 447-F DO CAMPO","197 - 447-F DO CAMPO | CHACARAS",
+    "198 - 447-RECOLHE","199 - 448-BRF","200 - 448-RECOLHE","201 - 449-LITUANIA",
+    "202 - 449-RECOLHE","203 - 501-PARADOR","204 - 501-PARADOR/ A BOA VISTA","205 - 501- RECOLHE",
+    "206 - 502-PARADOR OURO VERDE","207 - 502-ATE RES. DAS AMERICAS","208 - 502-RECOLHE",
+    "209 - 504-PARADOR MILTON GAVETTI","210 - 504- RECOLHE","211 - 505-EXPRESSO | T VIVI XAVIER",
+    "212 - 505- RECOLHE","213 - 512-T. O VERDE","214 - 512- RECOLHE",
+    "215 - 703-RAPIDO AQUILES-CENTRO","216 - 703-RAPIDO/ ATE GAVETTI","217 - 703-RECOLHE",
+    "218 - 706-RAPIDO MARIA CECILIA","219 - 706-RAPIDO/ ATE GAVETTI","220 - 706- RECOLHE",
+    "221 - 800-VIVI XAVIER/ ACAPULCO","222 - 800-VIVI XAVIER/ ENC QUINTINO",
+    "223 - 800-VIVI XAVIER/ E HIGIENOPOLIS","224 - 800-VIVI XAVIER/ PIAUI",
+    "225 - 800-CENTRO/ ACAPULCO","226 - 800-ATE PIO XII","227 - 800- RECOLHE",
+    "228 - 801-VIVI XAVIER/ CENTRO CIVICO","229 - 801- RECOLHE",
+    "230 - 802-VIVI XAVIER/ BANDEIRANTES","231 - 802- RECOLHE",
+    "232 - 803-VIVI XAVIER/ SHOP CATUAI","233 - 803- RECOLHE","234 - 804- T OESTE/ G PALHANO",
+    "235 - 804- SHOP CATUAI/ G PALHANO","236 - 804- RECOLHE","237 - 806-S ELKIND/ SHOP CATUAI",
+    "238 - 806- RECOLHE","239 - 825-LONDRINATAL|SENT. SAUL ELKIND","240 - 825-LONDRINATAL|SENT. CATUAI",
+    "241 - 825-RECOLHE","242 - 835-UEL/ MILTON GAVETTI","243 - 835- RECOLHE",
+    "244 - 900-HU/POUPATEMPO/BOULEVARD","245 - 900- RECOLHE","246 - 901-SENTIDO 5 CONJUNTOS",
+    "247 - 901-SENTIDO CACIQUE","248 - 901-CACIQUE/ ENC VIVI XAVIER","249 - 901- RECOLHE",
+    "250 - 902-MARITACAS / PADOVANI","251 - 902-CID. INDUSTRIAL","252 - 902- RECOLHE",
+    "253 - 904-ACAPULCO/ BAND","254 - 904-ACAPULCO/ ARTHUR T","255 - 904-VIVI XAVIER/ BAND",
+    "256 - 904-VIVI XAVIER/ARTHUR T","257 - 904- ATE T OESTE","258 - 904- ATE SHOP CATUAI",
+    "259 - 904 - ATE BANDEIRANTES","260 - 904- RECOLHE","261 - 908-ACAPULCO EXPOSICAO",
+    "262 - 908-RECOLHE","263 - 913-G PALHANO/ ROBERT KOCH","264 - 913-G PALHANO/ ATE UEL",
+    "265 - 913- RECOLHE","266 - 931-SHOP NORTE","267 - 931-OURO VERDE","268 - 931-T OESTE",
+    "269 - 931- RECOLHE","270 - 932-VIVI XAVIER/TOESTE/ATE UEL","271 - 932- RECOLHE",
+    "272 - 934-JUNHO VERMELHO | T. CENTR","273 - 934-JUNHO VERMELHO | T. OESTE","274 - 934-RECOLHE",
+    "275 - ATE ACAPULCO","276 - ATE T OESTE","277 - ATE GAVETTI","278 - ATE OURO VERDE",
+    "279 - ATE VIVI XAVIER","280 - ATE SHOP CATUAI","281 - ATLAS","282 - BRATAC","283 - ESPECIAL",
+    "284 - EXPO JAPAO","285 - CENTRO DE EVENTOS","286 - EXPOSIÇAO","287 - CHACARA SINTVEST",
+    "288 - EXPRESSO","289 - HAKME","290 - HEMOCENTRO","291 - RESERVA TERMINAIS",
+    "292 - MANUTENÇAO","293 - VESTIBULAR","294 - TREINAMEN7O","295 - TESTE",
+    "296 - TERMINAL CENTRAL","297 - PREVENCAO CANCER DE MAMA","298 - 826-CARNAVAL/ ZERAO",
+    "995 - PARABENS LONDRINA"
+  ],
+  extra: [
+    "1 - GRANDE LONDRINA","2 - BOM DIA","3 - BOA TARDE","4 - BOA NOITE","5 - PARABENS LONDRINA",
+    "6 - FELIZ NATAL","7 - FELIZ ANO NOVO","8 - FELIZ PASCOA","9 - FELIZ DIA DOS PAIS",
+    "10 - FELIZ DIA DAS MAES","11 - FELIZ DIA DAS CRIANCAS","12 - FELIZ DIA DOS PROFESSORES",
+    "13 - FELIZ DIA DO PADROEIRO","14 - FELIZ DIA DO TRABALHO","15 - HEMOCENTRO",
+    "16 - CENTRASIL","17 - VIA OURO VERDE","18 - CIOP","19 - LEC NA SERIE B"
+  ]
+};
+
+// ── Render for both desktop and mobile ──
+let currentVersion = 'atual';
+
+function switchVersion(v){
+  currentVersion = v;
+  document.querySelectorAll('.toggle-btn, .m-toggle-btn').forEach((b,i)=>{
+    b.classList.toggle('active', (i===0||i===2) ? v==='atual' : v==='antigo');
+  });
+  // Actually: use data approach
+  const isAtual = v === 'atual';
+  document.querySelectorAll('.toggle-btn').forEach((b,i)=> b.classList.toggle('active', i===0 ? isAtual : !isAtual));
+  document.querySelectorAll('.m-toggle-btn').forEach((b,i)=> b.classList.toggle('active', i===0 ? isAtual : !isAtual));
+  document.getElementById('d-search').value = '';
+  document.getElementById('m-search').value = '';
+  renderTables();
+}
+
+function filterCodes(prefix){
+  const val = document.getElementById(prefix+'-search').value;
+  // sync both
+  document.getElementById('d-search').value = val;
+  document.getElementById('m-search').value = val;
+  renderTables(val);
+}
+
+function parseItem(str){
+  const dash = str.indexOf(' - ');
+  return { code: str.substring(0, dash), desc: str.substring(dash + 3) };
+}
+
+function buildTableHTML(data, filter){
+  const f = filter ? filter.toUpperCase() : '';
+  const rows = data.map(str => {
+    const {code, desc} = parseItem(str);
+    const visible = !f || code.toUpperCase().includes(f) || desc.toUpperCase().includes(f);
+    return `<tr class="${visible ? '' : 'hidden-row'}"><td>${code}</td><td>${desc}</td></tr>`;
+  }).join('');
+  return `<table><thead><tr><th>Código</th><th>Descrição</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function renderTables(filter=''){
+  const data  = currentVersion === 'atual' ? dataAtual : dataAntigo;
+  const label = currentVersion === 'atual' ? 'Atualizado 23/04/2026' : 'Versão anterior';
+
+  // Desktop
+  document.getElementById('d-table-area').innerHTML = `
+    <div>
+      <div class="section-title">Tabela de Códigos <span class="update-badge">${label}</span></div>
+      ${buildTableHTML(data.main, filter)}
+    </div>
+    <div>
+      <div class="section-title">Códigos Extra</div>
+      ${buildTableHTML(data.extra, filter)}
+    </div>`;
+
+  // Mobile
+  document.getElementById('m-table-area').innerHTML = `
+    <div>
+      <div class="m-section-title">Tabela de Códigos <span style="font-size:10px;color:var(--muted);font-weight:400">${label}</span></div>
+      <div class="m-table-wrap">${buildTableHTML(data.main, filter)}</div>
+    </div>
+    <div>
+      <div class="m-section-title">Códigos Extra</div>
+      <div class="m-table-wrap">${buildTableHTML(data.extra, filter)}</div>
+    </div>`;
+}
+
+renderTables();
+
+</script>
 </body>
-
 </html>
