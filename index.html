@@ -412,8 +412,12 @@
       <!-- PAGE: Trajetos Ociosos -->
       <div class="panel d-detail hidden" id="d-page-ocioso">
         <div class="d-pane" style="flex:1;overflow:hidden">
+          <!-- search box -->
+          <div class="search-box" style="flex-shrink:0;margin-bottom:0">
+            <input type="text" id="d-ocioso-search" placeholder="Buscar linha…" autocomplete="off" oninput="filterOcioso(this.value)">
+          </div>
           <!-- list view -->
-          <div id="d-ocioso-list" style="display:flex;flex-direction:column;flex:1;overflow:hidden;margin-top:8px">
+          <div id="d-ocioso-list" style="display:flex;flex-direction:column;flex:1;overflow:hidden">
             <div class="card-list" id="d-ocioso-cards"></div>
           </div>
 
@@ -483,8 +487,8 @@
 
   <!-- SCREEN: Ocioso nível 1 – lista de linhas -->
   <div class="m-screen" id="m-s-ocioso" style="flex:1;flex-direction:column;overflow:hidden">
-    <div style="padding:10px 14px;background:var(--white);border-bottom:1px solid var(--border);flex-shrink:0">
-      <div style="font-size:13px;color:var(--muted)">Selecione a linha para ver os trajetos ociosos</div>
+    <div class="m-search">
+      <input type="text" id="m-ocioso-search" placeholder="🔍  Buscar linha…" autocomplete="off">
     </div>
     <div class="m-route-list" id="m-ocioso-line-list"></div>
   </div>
@@ -643,7 +647,7 @@ const routesInicio = [
 
 
 const ocisoData = [
-  {name:"Terminais",isTerminal:true,inicio:[{label:"Terminal Central Inferior",url:"https://www.google.com/maps/d/embed?mid=1bc0ZZK-YnLle7Z5e__TfAdAWPNDzIy4&ehbc=2E312F"},{label:"Terminal Central Superior",url:"https://www.google.com/maps/d/embed?mid=1v0bIYc0ZdYMWjqQW-cWlrbtITyCh9Ms&ehbc=2E312F"},{label:"Terminal Vivi Xavier",url:"https://www.google.com/maps/d/embed?mid=1JwctNXvApEviSLTar3QIAmdEwDotl8o&ehbc=2E312F"},{label:"Terminal Região Oeste",url:"https://www.google.com/maps/d/embed?mid=1_6QHocjglZGeg4Gj43C1eOMgGW9EpCQ&ehbc=2E312F"},{label:"Terminal Milton Gavetti",url:"https://www.google.com/maps/d/embed?mid=1subtwMhp8lsK4JP5-eB0FSwa1mpELn0&ehbc=2E312F"},{label:"Terminal Ouro Verde",url:"https://www.google.com/maps/d/embed?mid=1Hopj0PaEB1GcYbm839zFkfsbn4CVx3M&ehbc=2E312F"},{label:"Terminal Acapulco",url:"https://www.google.com/maps/d/embed?mid=1RaaFPK_nMgXhjkhr34Yrh4YLrBxzdGI&ehbc=2E312F"},{label:"Terminal Shopping Catuaí",url:"https://www.google.com/maps/d/embed?mid=1_JwCxjPv0BU4wGN9ummpe0EmfmGyKb0&ehbc=2E312F"}],recolha:[{label:"Terminal Central Inferior",url:"https://www.google.com/maps/d/embed?mid=1DSR7knIyAna8HjxohEeA3CN04Pr7Gao&ehbc=2E312F"},{label:"Terminal Central Superior",url:"https://www.google.com/maps/d/embed?mid=1X8VX-8jaInRRoAxNGQJjRfQ_Ofug-Sc&ehbc=2E312F"},{label:"Terminal Região Oeste",url:"https://www.google.com/maps/d/embed?mid=11n1_eDGlx6XJBIAKSzW64b0HjurHxVE&ehbc=2E312F"},{label:"Terminal Milton Gavetti",url:"https://www.google.com/maps/d/embed?mid=1OFGMrr_SbR_3k2RQEKQkYFItEeNhZ54&ehbc=2E312F"},{label:"Terminal Vivi Xavier",url:"https://www.google.com/maps/d/embed?mid=1uehKi2s0n3ph46ZvvG-WjIEArKML9go&ehbc=2E312F"},{label:"Terminal Shopping Catuaí",url:"https://www.google.com/maps/d/embed?mid=1NvhRI2DijCXK3usTx05w06QnsQdFnGg&ehbc=2E312F"},{label:"Terminal Acapulco",url:"https://www.google.com/maps/d/embed?mid=1_izL6vYlFKuvbZ2LEI3MVUhB7IHkMG8&ehbc=2E312F"},{label:"Terminal Ouro Verde",url:"https://www.google.com/maps/d/embed?mid=1xcKj-bsQy7_sUxiiNLyzn_tpd1K1fpA&ehbc=2E312F"}]},
+  {name:"Terminais",isTerminal:true,inicio:[{label:"Terminal Central Inferior",url:"https://www.google.com/maps/d/embed?mid=1bc0ZZK-YnLle7Z5e__TfAdAWPNDzIy4&ehbc=2E312F"},{label:"Terminal Central Superior",url:"https://www.google.com/maps/d/embed?mid=1JwctNXvApEviSLTar3QIAmdEwDotl8o&ehbc=2E312F"},{label:"Terminal Vivi Xavier",url:"https://www.google.com/maps/d/embed?mid=1JwctNXvApEviSLTar3QIAmdEwDotl8o&ehbc=2E312F"},{label:"Terminal Região Oeste",url:"https://www.google.com/maps/d/embed?mid=1_6QHocjglZGeg4Gj43C1eOMgGW9EpCQ&ehbc=2E312F"},{label:"Terminal Milton Gavetti",url:"https://www.google.com/maps/d/embed?mid=1subtwMhp8lsK4JP5-eB0FSwa1mpELn0&ehbc=2E312F"},{label:"Terminal Ouro Verde",url:"https://www.google.com/maps/d/embed?mid=1Hopj0PaEB1GcYbm839zFkfsbn4CVx3M&ehbc=2E312F"},{label:"Terminal Acapulco",url:"https://www.google.com/maps/d/embed?mid=1RaaFPK_nMgXhjkhr34Yrh4YLrBxzdGI&ehbc=2E312F"},{label:"Terminal Shopping Catuaí",url:"https://www.google.com/maps/d/embed?mid=1_JwCxjPv0BU4wGN9ummpe0EmfmGyKb0&ehbc=2E312F"}],recolha:[{label:"Terminal Central Inferior",url:"https://www.google.com/maps/d/embed?mid=1DSR7knIyAna8HjxohEeA3CN04Pr7Gao&ehbc=2E312F"},{label:"Terminal Central Superior",url:"https://www.google.com/maps/d/embed?mid=1X8VX-8jaInRRoAxNGQJjRfQ_Ofug-Sc&ehbc=2E312F"},{label:"Terminal Região Oeste",url:"https://www.google.com/maps/d/embed?mid=11n1_eDGlx6XJBIAKSzW64b0HjurHxVE&ehbc=2E312F"},{label:"Terminal Milton Gavetti",url:"https://www.google.com/maps/d/embed?mid=1OFGMrr_SbR_3k2RQEKQkYFItEeNhZ54&ehbc=2E312F"},{label:"Terminal Vivi Xavier",url:"https://www.google.com/maps/d/embed?mid=1uehKi2s0n3ph46ZvvG-WjIEArKML9go&ehbc=2E312F"},{label:"Terminal Shopping Catuaí",url:"https://www.google.com/maps/d/embed?mid=1NvhRI2DijCXK3usTx05w06QnsQdFnGg&ehbc=2E312F"},{label:"Terminal Acapulco",url:"https://www.google.com/maps/d/embed?mid=1_izL6vYlFKuvbZ2LEI3MVUhB7IHkMG8&ehbc=2E312F"},{label:"Terminal Ouro Verde",url:"https://www.google.com/maps/d/embed?mid=1xcKj-bsQy7_sUxiiNLyzn_tpd1K1fpA&ehbc=2E312F"}]},
   {name:"101",isTerminal:false,inicio:[{label:"via Angelina",url:"https://www.google.com/maps/d/embed?mid=117FfJ1pH3mX1oLH9KEUD-r1txtipHP4&ehbc=2E312F"},{label:"via Gino",url:"https://www.google.com/maps/d/embed?mid=1Ubg4LTVrYTSDDB46qJPHSKbPO7761vA&ehbc=2E312F"}],recolha:[{label:"via Angelina",url:"https://www.google.com/maps/d/embed?mid=1VP6MY0YidpZnwKC3geSUMYaV6OJ5v3Y&ehbc=2E312F"},{label:"via Gino",url:"https://www.google.com/maps/d/embed?mid=1AlPcCiITF-_bkyBvvz6API14xwtSwNo&ehbc=2E312F"}]},
   {name:"102",isTerminal:false,inicio:[{label:"Bairro",url:"https://www.google.com/maps/d/embed?mid=1-D_YElKgqZv3XOzCmho3Ib_tAap7-uk&ehbc=2E312F"}],recolha:[{label:"Bairro",url:"https://www.google.com/maps/d/embed?mid=1a42XzdqQjmy2G12gZ2poqgIktoqrwx0&ehbc=2E312F"}]},
   {name:"103",isTerminal:false,inicio:[{label:"via Ambas vias",url:"https://www.google.com/maps/d/embed?mid=1ArEZxgmONO8q-9uHZfHFjyNv0IWbU-Y&ehbc=2E312F"}],recolha:[{label:"via Mangaba",url:"https://www.google.com/maps/d/embed?mid=14Lkl2vz86mnJJQHp6v5Vyr2eq1qscQY&ehbc=2E312F"},{label:"via Monte Cristo",url:"https://www.google.com/maps/d/embed?mid=1CccTtTLzlLaXozADy-H2Y07m6mmMXlw&ehbc=2E312F"}]},
@@ -794,9 +798,11 @@ function dOciosoShowCards(html){
   document.getElementById('d-ocioso-cards').innerHTML = html;
 }
 
-function dBuildOciosoCards(){
+function dBuildOciosoCards(filter=''){
+  const f = filter.toLowerCase();
   let html = '';
   ocisoData.forEach((line,i)=>{
+    if(f && !line.name.toLowerCase().includes(f)) return;
     const hasBoth = line.inicio.length>0 && line.recolha.length>0;
     const sub = hasBoth ? 'Início + Recolha' : line.inicio.length>0 ? 'Somente início' : 'Somente recolha';
     html+=`<div class="card-item" onclick="dOciosoSelectLine(${i})">
@@ -880,7 +886,8 @@ function dOciosoShowMap(url, title, tipo, backFn){
 }
 
 function dOciosoBackToList(){
-  dBuildOciosoCards();
+  const q = document.getElementById('d-ocioso-search');
+  dBuildOciosoCards(q ? q.value : '');
 }
 
 document.getElementById('d-search').addEventListener('input', e=>dBuildList(e.target.value));
@@ -910,12 +917,26 @@ function mTabbar(tab){
 let mOciosoLineIdx = -1;
 let mOciosoTipo = 'inicio'; // 'inicio' | 'recolha'
 
+// ── Ocioso search filter ──
+function filterOcioso(query){
+  const f = query.toLowerCase();
+  // sync both inputs
+  const di = document.getElementById('d-ocioso-search');
+  const mi = document.getElementById('m-ocioso-search');
+  if(di && di.value !== query) di.value = query;
+  if(mi && mi.value !== query) mi.value = query;
+  dBuildOciosoCards(f);
+  mBuildOciosoLineList(f);
+}
+
 // Nível 1: lista de linhas
-function mBuildOciosoLineList(){
+function mBuildOciosoLineList(filter=''){
   const el = document.getElementById('m-ocioso-line-list');
+  const f = filter.toLowerCase();
   let html = '';
   // Terminais primeiro, depois linhas numéricas
   ocisoData.forEach((line, i)=>{
+    if(f && !line.name.toLowerCase().includes(f)) return;
     const isTerminal = line.isTerminal;
     const hasBoth = line.inicio.length > 0 && line.recolha.length > 0;
     const hasInicio = line.inicio.length > 0;
@@ -1039,6 +1060,7 @@ function mSelectRoute(i){
 }
 
 document.getElementById('m-search').addEventListener('input', e=>mBuildList(e.target.value));
+document.getElementById('m-ocioso-search').addEventListener('input', e=>filterOcioso(e.target.value));
 
 // ══════════════════════════
 // INIT
