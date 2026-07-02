@@ -345,6 +345,10 @@
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
         Itinerários
       </div>
+      <div class="nav-item" onclick="dSwitchPage('atualizacao')" id="dnav-atualizacao">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        Atualização de Itinerários
+      </div>
       <div class="nav-item" onclick="dSwitchPage('ocioso')" id="dnav-ocioso">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
         Trajetos Ociosos
@@ -403,6 +407,25 @@
               Abrir no Google Maps
             </a>
           </div>
+        </div>
+        <div class="notice">
+          <p><strong>Divergências?</strong> Contato: Islan / Odair / Will — 3372-5222 | 3372-5205 | 3372-5206 | 3372-5207</p>
+        </div>
+      </div>
+
+      <!-- PAGE: Atualização de Itinerários -->
+      <div class="panel d-detail hidden" id="d-page-atualizacao">
+        <div class="d-pane" style="flex:1;overflow:hidden">
+          <div style="background:#fef3c7;border-left:3px solid #d97706;border-radius:0 8px 8px 0;padding:10px 14px;flex-shrink:0;margin-bottom:12px">
+            <p style="font-size:14px;color:#92400e;line-height:1.6">
+              <strong>Atenção:</strong> Os trajetos a seguir estarão em vigência a partir de <strong>12/07/26</strong>.<br>
+              Em caso de dúvidas, entre em contato com o CIOP.
+            </p>
+          </div>
+          <div class="search-box" style="flex-shrink:0">
+            <input type="text" id="d-atu-search" placeholder="Buscar linha…" autocomplete="off" oninput="filterAtualizacao(this.value)">
+          </div>
+          <div class="d-route-list" id="d-atu-list"></div>
         </div>
         <div class="notice">
           <p><strong>Divergências?</strong> Contato: Islan / Odair / Will — 3372-5222 | 3372-5205 | 3372-5206 | 3372-5207</p>
@@ -485,6 +508,36 @@
     </div>
   </div>
 
+  <!-- SCREEN: Atualização de Itinerários -->
+  <div class="m-screen" id="m-s-atualizacao" style="flex:1;flex-direction:column;overflow:hidden">
+    <div style="background:#fef3c7;border-left:3px solid #d97706;padding:10px 16px;flex-shrink:0">
+      <p style="font-size:14px;color:#92400e;line-height:1.6">
+        <strong>Atenção:</strong> Os trajetos a seguir estarão em vigência a partir de <strong>12/07/26</strong>. Em caso de dúvidas, entre em contato com o CIOP.
+      </p>
+    </div>
+    <div class="m-search">
+      <input type="text" id="m-atu-search" placeholder="🔍  Buscar linha…" autocomplete="off">
+    </div>
+    <div class="m-route-list" id="m-atu-list"></div>
+    <!-- Mobile detail screen for atualizacao -->
+  </div>
+
+  <!-- SCREEN: Atualização – detalhe do mapa -->
+  <div class="m-screen" id="m-s-atualizacao-map" style="flex:1;flex-direction:column;overflow:hidden">
+    <div class="m-screen-hdr">
+      <button class="m-back" onclick="mGoTo('atualizacao')">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        Voltar
+      </button>
+      <span class="m-screen-title" id="m-atu-title"></span>
+    </div>
+    <div class="m-map-wrap" id="m-atu-map" style="flex:1"></div>
+    <a class="m-open-btn" id="m-atu-link" href="#" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+      Abrir no Google Maps
+    </a>
+  </div>
+
   <!-- SCREEN: Ocioso nível 1 – lista de linhas -->
   <div class="m-screen" id="m-s-ocioso" style="flex:1;flex-direction:column;overflow:hidden">
     <div class="m-search">
@@ -531,6 +584,10 @@
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
       <span>Itinerários</span>
     </div>
+    <div class="m-tabbar-item" onclick="mTabbar('atualizacao')" id="mtb-atualizacao">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+      <span>Atualização</span>
+    </div>
     <div class="m-tabbar-item" onclick="mTabbar('ocioso')" id="mtb-ocioso">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
       <span>Ociosos</span>
@@ -548,6 +605,19 @@
 // ══════════════════════════
 // DATA
 // ══════════════════════════
+
+const routesAtualizacao = [
+  {group:"Alteração de trajeto",name:"96",url:"https://www.google.com/maps/d/embed?mid=1kn8qtax6PPdPbWgFe7ccyIb4zIw-gXw&ehbc=2E312F"},
+  {group:"Alteração de trajeto",name:"101",url:"https://www.google.com/maps/d/embed?mid=1K1kP_hFq_L4zFRy7VllBdCoqnGiYK08&ehbc=2E312F"},
+  {group:"Alteração de trajeto",name:"111",url:"https://www.google.com/maps/d/embed?mid=1vU4FTJJVGquo3KUeVnM1K1PJyz63lzI&ehbc=2E312F"},
+  {group:"Alteração de trajeto",name:"113",url:"https://www.google.com/maps/d/embed?mid=1bW0ZbNYFgTYjWY-lQiW8-n4oTE8vNho&ehbc=2E312F"},
+  {group:"Alteração de trajeto",name:"121",url:"https://www.google.com/maps/d/embed?mid=1CXDBQwmX47Mgs2njT5Da4KWgR9VXDJc&ehbc=2E312F"},
+  {group:"Alteração de trajeto",name:"301",url:"https://www.google.com/maps/d/embed?mid=1qyW_00iLlNafkFzYXT5uPuQlXjZ8wfY&ehbc=2E312F"},
+  {group:"Alteração de trajeto",name:"312",url:"https://www.google.com/maps/d/embed?mid=1ohyYyt2LugLSKPZBOD0kbgKkqqrnkDs&ehbc=2E312F"},
+  {group:"Alteração de trajeto",name:"430",url:"https://www.google.com/maps/d/embed?mid=13qQU4_ssOJTXcF9wG0dK4Abe-PfPFIQ&ehbc=2E312F"},
+  {group:"Alteração de trajeto",name:"902",url:"https://www.google.com/maps/d/embed?mid=17WaEHOJN5V8CQ0munLd-JyKjFD8Wu3M&ehbc=2E312F"},
+  {group:"Alteração de trajeto",name:"904",url:"https://www.google.com/maps/d/embed?mid=1JiE1h041dbOBu1mzxVQCgGrDGfwQT5g&ehbc=2E312F"},
+];
 const routesInicio = [
   {group:"ESPECIAIS",name:"081 - Epesmel",url:"https://www.google.com/maps/d/u/0/embed?mid=1ZuNkCQ773PXmDR-_HYcVFmL3yj1L-dI&ehbc=2E312F"},
   {group:"ESPECIAIS",name:"086 - Especial APAE",url:"https://www.google.com/maps/d/u/0/embed?mid=168Novg05tLUntc3PD1xSJLOwpZJle8c&ehbc=2E312F"},
@@ -776,13 +846,13 @@ function dSelectRoute(i){
 
 // ── Desktop page switching (sidebar nav) ──
 function dSwitchPage(page){
-  ['itinerario','ocioso'].forEach(p=>{
+  ['itinerario','atualizacao','ocioso'].forEach(p=>{
     document.getElementById('d-page-'+p).classList.toggle('hidden', p!==page);
     document.getElementById('dnav-'+p).classList.toggle('active', p===page);
   });
-  // List panel only makes sense on itinerário page
   document.getElementById('d-list-panel').style.display = page==='itinerario' ? 'flex' : 'none';
   if(page==='ocioso') dBuildOciosoCards();
+  if(page==='atualizacao'){ dBuildAtuList(); dHideAtuMap(); }
 }
 
 
@@ -906,6 +976,10 @@ function mTabbar(tab){
   if(tab==='itinerarios'){
     document.getElementById('mtb-itinerarios').classList.add('active');
     mGoTo('list');
+  } else if(tab==='atualizacao'){
+    document.getElementById('mtb-atualizacao').classList.add('active');
+    mGoTo('atualizacao');
+    mBuildAtuList();
   } else if(tab==='ocioso'){
     document.getElementById('mtb-ocioso').classList.add('active');
     mGoTo('ocioso');
@@ -1061,13 +1135,118 @@ function mSelectRoute(i){
 
 document.getElementById('m-search').addEventListener('input', e=>mBuildList(e.target.value));
 document.getElementById('m-ocioso-search').addEventListener('input', e=>filterOcioso(e.target.value));
+document.getElementById('m-atu-search').addEventListener('input', e=>filterAtualizacao(e.target.value));
 
-// ═════════════════════════
+
+// ══════════════════════════
+// ATUALIZAÇÃO DE ITINERÁRIOS
+// ══════════════════════════
+function filterAtualizacao(query){
+  const f = query ? query.toLowerCase() : '';
+  const di = document.getElementById('d-atu-search');
+  const mi = document.getElementById('m-atu-search');
+  if(di && di.value !== query) di.value = query;
+  if(mi && mi.value !== query) mi.value = query;
+  dBuildAtuList(f);
+  mBuildAtuList(f);
+}
+
+function dBuildAtuList(filter=''){
+  const el = document.getElementById('d-atu-list');
+  const f = filter.toLowerCase();
+  let html = '<div class="group-lbl">Alteração de Trajeto</div>';
+  routesAtualizacao.forEach((r,i)=>{
+    if(f && !r.name.toLowerCase().includes(f)) return;
+    html+=`<div class="route-row" onclick="dSelectAtu(${i})">
+      <span class="rnum">${r.name}</span>
+      <span class="rname">${r.group}</span>
+      ${chevSvg()}
+    </div>`;
+  });
+  el.innerHTML = html;
+}
+
+function dSelectAtu(i){
+  const r = routesAtualizacao[i];
+  // reuse detail panel logic inline
+  document.querySelectorAll('#d-atu-list .route-row').forEach((row,idx)=>{
+    row.classList.toggle('active', idx-1===i); // -1 for group label
+  });
+  // Show map in a simple overlay approach: reuse d-it-map area by switching page
+  // Actually show in a dedicated right panel — we'll use the same detail structure
+  dShowAtuMap(r.url, 'Linha ' + r.name, r.group);
+}
+
+let _dAtuMapVisible = false;
+function dShowAtuMap(url, title, sub){
+  _dAtuMapVisible = true;
+  // Inject a temporary map panel next to the list
+  let mp = document.getElementById('d-atu-map-panel');
+  if(!mp){
+    mp = document.createElement('div');
+    mp.id = 'd-atu-map-panel';
+    mp.style.cssText = 'flex:1;display:flex;flex-direction:column;gap:12px;padding:14px;overflow:hidden';
+    document.getElementById('d-page-atualizacao').querySelector('.d-pane').after(mp);
+  }
+  mp.innerHTML = `
+    <button class="back-link" onclick="dHideAtuMap()" style="flex-shrink:0">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" width="16" height="16"><path d="M15 18l-6-6 6-6"/></svg>
+      Voltar
+    </button>
+    <div style="flex-shrink:0">
+      <div class="detail-title">Linha ${title.replace('Linha ','')}</div>
+      <div class="detail-sub">${sub}</div>
+    </div>
+    <div class="map-frame" style="flex:1">
+      <iframe src="${url}" allowfullscreen loading="lazy" style="width:100%;height:100%;border:none;display:block"></iframe>
+    </div>
+    <a class="open-btn" href="${url}" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+      Abrir no Google Maps
+    </a>`;
+}
+
+function dHideAtuMap(){
+  const mp = document.getElementById('d-atu-map-panel');
+  if(mp) mp.innerHTML = '';
+}
+
+function mBuildAtuList(filter=''){
+  const el = document.getElementById('m-atu-list');
+  if(!el) return;
+  const f = filter.toLowerCase();
+  let html = '';
+  routesAtualizacao.forEach((r,i)=>{
+    if(f && !r.name.toLowerCase().includes(f)) return;
+    html+=`<div class="m-route-item" onclick="mSelectAtu(${i})">
+      <span class="m-rnum">${r.name}</span>
+      <div style="flex:1">
+        <div class="m-rname">Linha ${r.name}</div>
+        <div class="m-rgrp">${r.group}</div>
+      </div>
+      ${chevSvg('m-rchev')}
+    </div>`;
+  });
+  el.innerHTML = html || '<div style="padding:16px;color:var(--muted);font-size:13px">Nenhuma linha encontrada.</div>';
+}
+
+function mSelectAtu(i){
+  const r = routesAtualizacao[i];
+  document.getElementById('m-atu-title').textContent = 'Linha ' + r.name;
+  document.getElementById('m-atu-map').innerHTML =
+    `<iframe src="${r.url}" allowfullscreen loading="lazy" style="width:100%;height:100%;border:none;display:block"></iframe>`;
+  document.getElementById('m-atu-link').href = r.url;
+  mGoTo('atualizacao-map');
+}
+
+// ══════════════════════════
 // INIT
-// ═════════════════════════
+// ══════════════════════════
 dBuildList();
+dBuildAtuList();
 dBuildOciosoCards();
 mBuildList();
+mBuildAtuList();
 mBuildOciosoLineList();
 </script>
 </body>
