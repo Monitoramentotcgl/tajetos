@@ -414,21 +414,53 @@
       </div>
 
       <!-- PAGE: Atualização de Itinerários -->
-      <div class="panel d-detail hidden" id="d-page-atualizacao">
-        <div class="d-pane" style="flex:1;overflow:hidden">
-          <div style="background:#fef3c7;border-left:3px solid #d97706;border-radius:0 8px 8px 0;padding:10px 14px;flex-shrink:0;margin-bottom:12px">
-            <p style="font-size:14px;color:#92400e;line-height:1.6">
-              <strong>Atenção:</strong> Os trajetos a seguir estarão em vigência a partir de <strong>12/07/26</strong>.<br>
-              Em caso de dúvidas, entre em contato com o CIOP.
-            </p>
+      <!-- uses display:contents so its children join the flex row of d-content -->
+      <div id="d-page-atualizacao" style="display:none">
+        <!-- Left: list panel -->
+        <div class="panel" style="width:300px;flex-shrink:0;display:flex;flex-direction:column;overflow:hidden">
+          <div class="panel-hdr">
+            <div class="panel-hdr-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" style="width:16px;height:16px;stroke:var(--blue-mid)"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              Linhas atualizadas
+            </div>
+            <span class="panel-count">10 linhas</span>
           </div>
-          <div class="search-box" style="flex-shrink:0">
+          <div class="search-box">
             <input type="text" id="d-atu-search" placeholder="Buscar linha…" autocomplete="off" oninput="filterAtualizacao(this.value)">
           </div>
           <div class="d-route-list" id="d-atu-list"></div>
         </div>
-        <div class="notice">
-          <p><strong>Divergências?</strong> Contato: Islan / Odair / Will — 3372-5222 | 3372-5205 | 3372-5206 | 3372-5207</p>
+        <!-- Right: detail panel -->
+        <div class="panel d-detail" style="display:flex;flex-direction:column;overflow:hidden">
+          <div class="d-pane" style="flex:1">
+            <!-- Notice -->
+            <div style="background:#fef3c7;border-left:3px solid #d97706;border-radius:0 8px 8px 0;padding:10px 14px;flex-shrink:0">
+              <p style="font-size:14px;color:#92400e;line-height:1.6">
+                <strong>Atenção:</strong> Os trajetos a seguir estarão em vigência a partir de <strong>12/07/26</strong>.<br>
+                Em caso de dúvidas, entre em contato com o CIOP.
+              </p>
+            </div>
+            <!-- Empty state -->
+            <div class="map-empty" id="d-atu-empty">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 13l4.553 2.276A1 1 0 0021 21.382V10.618a1 1 0 00-.553-.894L15 7m0 13V7m0 0L9 4"/></svg>
+              <p>Selecione uma linha à esquerda</p>
+            </div>
+            <!-- Map content -->
+            <div id="d-atu-content" class="hidden" style="display:flex;flex-direction:column;gap:12px;height:100%">
+              <div>
+                <div class="detail-title" id="d-atu-title"></div>
+                <div class="detail-sub">Alteração de trajeto</div>
+              </div>
+              <div class="map-frame" id="d-atu-map"></div>
+              <a class="open-btn" id="d-atu-link" href="#" target="_blank">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                Abrir no Google Maps
+              </a>
+            </div>
+          </div>
+          <div class="notice">
+            <p><strong>Divergências?</strong> Contato: Islan / Odair / Will — 3372-5222 | 3372-5205 | 3372-5206 | 3372-5207</p>
+          </div>
         </div>
       </div>
 
@@ -847,7 +879,12 @@ function dSelectRoute(i){
 // ── Desktop page switching (sidebar nav) ──
 function dSwitchPage(page){
   ['itinerario','atualizacao','ocioso'].forEach(p=>{
-    document.getElementById('d-page-'+p).classList.toggle('hidden', p!==page);
+    const el = document.getElementById('d-page-'+p);
+    if(p === 'atualizacao'){
+      el.style.display = p===page ? 'contents' : 'none';
+    } else {
+      el.classList.toggle('hidden', p!==page);
+    }
     document.getElementById('dnav-'+p).classList.toggle('active', p===page);
   });
   document.getElementById('d-list-panel').style.display = page==='itinerario' ? 'flex' : 'none';
@@ -1153,6 +1190,7 @@ function filterAtualizacao(query){
 
 function dBuildAtuList(filter=''){
   const el = document.getElementById('d-atu-list');
+  if(!el) return;
   const f = filter.toLowerCase();
   let html = '<div class="group-lbl">Alteração de Trajeto</div>';
   routesAtualizacao.forEach((r,i)=>{
@@ -1168,47 +1206,26 @@ function dBuildAtuList(filter=''){
 
 function dSelectAtu(i){
   const r = routesAtualizacao[i];
-  // reuse detail panel logic inline
   document.querySelectorAll('#d-atu-list .route-row').forEach((row,idx)=>{
-    row.classList.toggle('active', idx-1===i); // -1 for group label
+    row.classList.toggle('active', idx === i);
   });
-  // Show map in a simple overlay approach: reuse d-it-map area by switching page
-  // Actually show in a dedicated right panel — we'll use the same detail structure
-  dShowAtuMap(r.url, 'Linha ' + r.name, r.group);
-}
-
-let _dAtuMapVisible = false;
-function dShowAtuMap(url, title, sub){
-  _dAtuMapVisible = true;
-  // Inject a temporary map panel next to the list
-  let mp = document.getElementById('d-atu-map-panel');
-  if(!mp){
-    mp = document.createElement('div');
-    mp.id = 'd-atu-map-panel';
-    mp.style.cssText = 'flex:1;display:flex;flex-direction:column;gap:12px;padding:14px;overflow:hidden';
-    document.getElementById('d-page-atualizacao').querySelector('.d-pane').after(mp);
-  }
-  mp.innerHTML = `
-    <button class="back-link" onclick="dHideAtuMap()" style="flex-shrink:0">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" width="16" height="16"><path d="M15 18l-6-6 6-6"/></svg>
-      Voltar
-    </button>
-    <div style="flex-shrink:0">
-      <div class="detail-title">Linha ${title.replace('Linha ','')}</div>
-      <div class="detail-sub">${sub}</div>
-    </div>
-    <div class="map-frame" style="flex:1">
-      <iframe src="${url}" allowfullscreen loading="lazy" style="width:100%;height:100%;border:none;display:block"></iframe>
-    </div>
-    <a class="open-btn" href="${url}" target="_blank">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-      Abrir no Google Maps
-    </a>`;
+  document.getElementById('d-atu-empty').classList.add('hidden');
+  const c = document.getElementById('d-atu-content');
+  c.classList.remove('hidden'); c.style.display = 'flex';
+  document.getElementById('d-atu-title').textContent = 'Linha ' + r.name;
+  document.getElementById('d-atu-map').innerHTML =
+    `<iframe src="${r.url}" allowfullscreen loading="lazy" style="width:100%;height:100%;border:none;display:block"></iframe>`;
+  document.getElementById('d-atu-link').href = r.url;
 }
 
 function dHideAtuMap(){
-  const mp = document.getElementById('d-atu-map-panel');
-  if(mp) mp.innerHTML = '';
+  const empty = document.getElementById('d-atu-empty');
+  const c = document.getElementById('d-atu-content');
+  if(empty) empty.classList.remove('hidden');
+  if(c){ c.classList.add('hidden'); c.style.display = 'none'; }
+  const map = document.getElementById('d-atu-map');
+  if(map) map.innerHTML = '';
+  document.querySelectorAll('#d-atu-list .route-row').forEach(r=>r.classList.remove('active'));
 }
 
 function mBuildAtuList(filter=''){
